@@ -1,0 +1,93 @@
+# puijs (`puijs`)
+
+> _Enterprise React 19 Component Library & Data Engine modeled after **Palantir Blueprint** (`@blueprintjs/core`, `@blueprintjs/table`)._
+
+[![npm version](https://img.shields.io/badge/npm-puijs-red.svg)](https://www.npmjs.com/package/puijs)
+[![React](https://img.shields.io/badge/React-18%20%26%2019-blue.svg)](package.json)
+[![Architecture](https://img.shields.io/badge/Architecture-Palantir%20Blueprint-indigo.svg)](ARCHITECTURE.md)
+[![License](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
+
+---
+
+## 1. Quick Start
+
+### Installation
+```bash
+npm install puijs lucide-react
+```
+
+### Import Styles & Wrap Root Provider
+```tsx
+import 'puijs/styles';
+import 'puijs/tokens';
+import { PuiProvider } from 'puijs';
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <PuiProvider defaultTheme="system" defaultBrand="foundry">
+      {children}
+    </PuiProvider>
+  );
+}
+```
+
+---
+
+## 2. Core Modules
+
+| Module | Exports & Capabilities |
+|:---|:---|
+| **Presentation Primitives** | `Button`, `Tag`, `Badge`, `Callout`, `Card`, `Table`, `Tree`, `Dialog`, `Drawer`, `Toast` |
+| **Commerce Suite** | `Price`, `ProductCard`, `ProductGrid`, `CartDrawer`, `CartItem`, `CartSummary`, `OrderCard`, `FacetFilter` |
+| **Reactive Store Layer** | `createStore`, `useStore` (`useSyncExternalStore`), `cartStore`, `wishlistStore`, `persist`, `logger` |
+| **Service Layer & DI** | `ServiceContainer`, `BaseService`, `EventEmitter`, `useService`, `TelemetryService`, `CartService` |
+| **API & Streaming Engine**| `ApiClient`, `QueryCache`, `StreamClient`, `useQuery`, `useMutation`, `useStream`, `useAPI` |
+
+---
+
+## 3. Usage Examples
+
+### Pure UI & Commerce
+```tsx
+import { ProductCard, Price, useCart } from 'puijs';
+
+export const ProductListing = ({ product }: { product: any }) => {
+  const cart = useCart();
+  return (
+    <ProductCard
+      id={product.id}
+      title={product.title}
+      price={product.price}
+      image={product.image}
+      onAddToCart={() => cart.addItem(product)}
+    />
+  );
+};
+```
+
+### Reactive Store & Time-Travel
+```tsx
+import { createStore, useStore } from 'puijs';
+
+const counterStore = createStore((set, get) => ({
+  count: 0,
+  inc: () => set({ count: get().count + 1 }),
+}));
+
+export const Counter = () => {
+  const { count, inc } = useStore(counterStore);
+  return <button onClick={inc}>Count: {count}</button>;
+};
+```
+
+---
+
+## 4. Documentation & Applications
+- **[`apps/pui-book`](apps/pui-book/)** (`puijs.com`): Interactive docs, live code playground, and component specs.
+- **[`apps/demo-app`](apps/demo-app/)**: Enterprise operational cockpit with live ontology tables and telemetry.
+- **[`apps/landing-app`](apps/landing-app/)**: Design system feature tour and theme switcher.
+
+---
+
+## License
+MIT © [GemPhi](https://github.com/gemphi)
