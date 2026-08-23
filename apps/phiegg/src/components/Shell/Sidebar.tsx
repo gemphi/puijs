@@ -1,6 +1,7 @@
 import React from 'react';
 import { Sidebar, SidebarHeader, SidebarBody, SidebarFooter, Stack, Button, Icon, Badge, Text, Title, Divider } from '@pui/components';
 import { Bot, Database, Radio, MapPin, GitBranch, Shield, BookOpen } from 'lucide-react';
+import styles from './Sidebar.module.scss';
 
 interface SidebarProps {
   activeTab: string;
@@ -21,7 +22,7 @@ export const SidebarNav: React.FC<SidebarProps> = ({ activeTab, onSelectTab }) =
   return (
     <Sidebar defaultCollapsed={false}>
       <SidebarHeader>
-        <Stack direction="column" gap={1}>
+        <Stack direction="column" gap={1} style={{ textAlign: 'left', width: '100%' }}>
           <Title level={5} size="sm">OPERATIONS</Title>
           <Text size="xs" variant="muted">Palantir Foundry Symmetry</Text>
         </Stack>
@@ -36,18 +37,20 @@ export const SidebarNav: React.FC<SidebarProps> = ({ activeTab, onSelectTab }) =
                 key={item.id}
                 variant={isActive ? 'primary' : 'ghost'}
                 size="md"
-                fullWidth
+                className={styles.navButton}
                 onClick={() => onSelectTab(item.id)}
-                icon={<Icon icon={item.icon} size="sm" />}
               >
-                <Stack direction="row" justify="between" align="center" style={{ width: '100%' }}>
-                  <Text size="sm">{item.label}</Text>
+                <div className={styles.navContent}>
+                  <div className={styles.navLeft}>
+                    <Icon icon={item.icon} size="sm" />
+                    <Text size="sm" className={styles.navLabel}>{item.label}</Text>
+                  </div>
                   {item.badge && (
                     <Badge variant={isActive ? 'neutral' : 'primary'} size="sm">
                       {item.badge}
                     </Badge>
                   )}
-                </Stack>
+                </div>
               </Button>
             );
           })}
