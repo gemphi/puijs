@@ -11,6 +11,7 @@ type ButtonBaseProps = {
   fullWidth?: boolean;
   loading?: boolean;
   loadingText?: string;
+  icon?: React.ReactNode;
   iconLeft?: LucideIcon;
   iconRight?: LucideIcon;
   className?: string;
@@ -35,6 +36,7 @@ export const Button = ({
   fullWidth = false,
   loading = false,
   loadingText,
+  icon,
   iconLeft,
   iconRight,
   className = '',
@@ -45,12 +47,10 @@ export const Button = ({
   const iconSize = size === BUTTON_SIZES.SM ? 14 : size === BUTTON_SIZES.LG ? 20 : 16;
   const iconSizeForIconVariant = size === BUTTON_SIZES.SM ? 16 : size === BUTTON_SIZES.LG ? 24 : 20;
 
-  const iconClass = cn(styles.spin);
-
   const classes = cn(
     styles.button,
     !isIcon && styles[size],
-    isIcon && styles[`icon${capitalize(size)}`],
+    isIcon && styles[`icon${size.charAt(0).toUpperCase() + size.slice(1)}`],
     styles[variant],
     fullWidth && styles.fullWidth,
     loading && styles.loading,
@@ -63,13 +63,14 @@ export const Button = ({
 
   const content = loading ? (
     <>
-      <Loader2 className={iconClass} aria-hidden size={isIcon ? iconSizeForIconVariant : iconSize} />
+      <Loader2 className={styles.spin} aria-hidden size={isIcon ? iconSizeForIconVariant : iconSize} />
       {!isIcon && <span>{loadingText || children}</span>}
     </>
   ) : (
     <>
+      {icon && <span className={styles.iconNode}>{icon}</span>}
       {!isIcon && IconLeft && <IconLeft aria-hidden size={iconSize} />}
-      {!isIcon && <span>{children}</span>}
+      {!isIcon && children && <span>{children}</span>}
       {!isIcon && IconRight && <IconRight aria-hidden size={iconSize} />}
       {isIcon && IconLeft && <IconLeft aria-hidden size={iconSizeForIconVariant} />}
     </>
@@ -91,7 +92,3 @@ export const Button = ({
     </button>
   );
 };
-
-function capitalize(value: string) {
-  return value.charAt(0).toUpperCase() + value.slice(1);
-}

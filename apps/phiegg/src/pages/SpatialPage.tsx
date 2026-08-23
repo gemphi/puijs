@@ -13,7 +13,7 @@ export const SpatialPage: React.FC = () => {
   return (
     <Page>
       <Stack direction="column" gap={4}>
-        <Stack direction="row" justify="between" align="center">
+        <Stack direction="row" justify="between" align="center" wrap>
           <Stack direction="column" gap={1}>
             <Title level={2} size="xl">PhiOra Spatial & Vector Embeddings Explorer</Title>
             <Text size="md" intent="secondary">HNSW nearest-neighbor vector similarity clustering and GeoSpatial coordinate indexing.</Text>
@@ -24,8 +24,8 @@ export const SpatialPage: React.FC = () => {
           </Tag>
         </Stack>
 
-        <Grid gap={3}>
-          <Col span={7}>
+        <Grid gap={3} xs={1} sm={1} md={1} lg={12}>
+          <Col span={7} xs={12} sm={12} md={12} lg={7}>
             <Card variant="default">
               <CardHeader action={<Tag intent="success" minimal round size="md">HNSW Indexed</Tag>}>
                 <Stack direction="row" align="center" gap={2}>
@@ -65,7 +65,7 @@ export const SpatialPage: React.FC = () => {
             </Card>
           </Col>
 
-          <Col span={5}>
+          <Col span={5} xs={12} sm={12} md={12} lg={5}>
             <Card variant="flat" style={{ padding: '16px' }}>
               <CardHeader>
                 <Stack direction="row" align="center" gap={2}>

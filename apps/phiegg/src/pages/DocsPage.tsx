@@ -25,7 +25,7 @@ export const DocsPage: React.FC = () => {
   return (
     <Page>
       <Stack direction="column" gap={4}>
-        <Stack direction="row" justify="between" align="center">
+        <Stack direction="row" justify="between" align="center" wrap>
           <Stack direction="column" gap={1}>
             <Title level={2} size="xl">Palantir SDK & Platform Reference Portal</Title>
             <Text size="md" intent="secondary">
@@ -46,8 +46,8 @@ export const DocsPage: React.FC = () => {
           </Stack>
         </Stack>
 
-        <Grid gap={3}>
-          <Col span={3}>
+        <Grid gap={3} xs={1} sm={1} md={1} lg={12}>
+          <Col span={3} xs={12} sm={12} md={4} lg={3}>
             <DocsSidebar
               namespaces={namespaces}
               selectedEndpointId={selectedEndpointId}
@@ -55,11 +55,11 @@ export const DocsPage: React.FC = () => {
             />
           </Col>
 
-          <Col span={5}>
+          <Col span={5} xs={12} sm={12} md={8} lg={5}>
             <DocsContent endpoint={currentEp} activeLanguage={activeLanguage} />
           </Col>
 
-          <Col span={4}>
+          <Col span={4} xs={12} sm={12} md={12} lg={4}>
             <DocsSandbox
               isRunning={isRunning}
               liveResponse={liveResponse}

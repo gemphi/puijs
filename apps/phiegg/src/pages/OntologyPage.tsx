@@ -13,12 +13,12 @@ export const OntologyPage: React.FC = () => {
   return (
     <Page>
       <Stack direction="column" gap={4}>
-        <Stack direction="row" justify="between" align="center">
+        <Stack direction="row" justify="between" align="center" wrap>
           <Stack direction="column" gap={1}>
             <Title level={2} size="xl">POntology Graph & Object Explorer</Title>
             <Text size="md" intent="secondary">Palantir Workshop-symmetrical entity grid, link traversals, and action mutations.</Text>
           </Stack>
-          <Stack direction="row" gap={2}>
+          <Stack direction="row" gap={2} wrap>
             {objectTypes.map((t) => (
               <Button
                 key={t.id}
@@ -32,12 +32,12 @@ export const OntologyPage: React.FC = () => {
           </Stack>
         </Stack>
 
-        <Grid gap={3}>
-          <Col span={8}>
+        <Grid gap={3} xs={1} sm={1} md={1} lg={12}>
+          <Col span={8} xs={12} sm={12} md={12} lg={8}>
             <OntologyTable currentType={currentType} onSelectInstance={selectInstance} />
           </Col>
 
-          <Col span={4}>
+          <Col span={4} xs={12} sm={12} md={12} lg={4}>
             <Card variant="flat" style={{ padding: '16px' }}>
               <CardHeader>
                 <Stack direction="row" align="center" gap={2}>

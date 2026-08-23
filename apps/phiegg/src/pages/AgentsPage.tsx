@@ -12,7 +12,7 @@ export const AgentsPage: React.FC = () => {
   return (
     <Page>
       <Stack direction="column" gap={4}>
-        <Stack direction="row" justify="between" align="center">
+        <Stack direction="row" justify="between" align="center" wrap>
           <Stack direction="column" gap={1}>
             <Title level={2} size="xl">AIP Agent Swarm Hub</Title>
             <Text size="md" intent="secondary">
@@ -25,8 +25,8 @@ export const AgentsPage: React.FC = () => {
           </Stack>
         </Stack>
 
-        <Grid gap={3}>
-          <Col span={3}>
+        <Grid gap={3} xs={1} sm={2} md={4} lg={4}>
+          <Col span={3} xs={12} sm={6} md={3} lg={3}>
             <Card variant="flat" style={{ padding: '16px' }}>
               <CardBody>
                 <Stack direction="row" align="center" gap={3}>
@@ -39,7 +39,7 @@ export const AgentsPage: React.FC = () => {
               </CardBody>
             </Card>
           </Col>
-          <Col span={3}>
+          <Col span={3} xs={12} sm={6} md={3} lg={3}>
             <Card variant="flat" style={{ padding: '16px' }}>
               <CardBody>
                 <Stack direction="row" align="center" gap={3}>
@@ -52,7 +52,7 @@ export const AgentsPage: React.FC = () => {
               </CardBody>
             </Card>
           </Col>
-          <Col span={3}>
+          <Col span={3} xs={12} sm={6} md={3} lg={3}>
             <Card variant="flat" style={{ padding: '16px' }}>
               <CardBody>
                 <Stack direction="row" align="center" gap={3}>
@@ -65,7 +65,7 @@ export const AgentsPage: React.FC = () => {
               </CardBody>
             </Card>
           </Col>
-          <Col span={3}>
+          <Col span={3} xs={12} sm={6} md={3} lg={3}>
             <Card variant="flat" style={{ padding: '16px' }}>
               <CardBody>
                 <Stack direction="row" align="center" gap={3}>
@@ -80,11 +80,11 @@ export const AgentsPage: React.FC = () => {
           </Col>
         </Grid>
 
-        <Grid gap={4}>
-          <Col span={7}>
-            <Grid gap={3}>
+        <Grid gap={4} xs={1} sm={1} md={1} lg={12}>
+          <Col span={7} xs={12} sm={12} md={12} lg={7}>
+            <Grid gap={3} xs={1} sm={1} md={2} lg={2}>
               {agents.map((agent) => (
-                <Col span={6} key={agent.id}>
+                <Col span={6} xs={12} sm={12} md={6} lg={6} key={agent.id}>
                   <AgentCard
                     agent={agent}
                     isSelected={agent.id === selectedAgentId}
@@ -94,7 +94,7 @@ export const AgentsPage: React.FC = () => {
               ))}
             </Grid>
           </Col>
-          <Col span={5}>
+          <Col span={5} xs={12} sm={12} md={12} lg={5}>
             <AgentChat />
           </Col>
         </Grid>
