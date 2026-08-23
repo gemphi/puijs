@@ -1,6 +1,6 @@
 import React from 'react';
-import { Page, Stack, Grid, Col, Card, CardHeader, CardBody, Title, Text, Tag, Badge, Button, Icon, Table, Thead, Tbody, Tr, Th, Td, ProgressBar } from '@pui/components';
-import { MapPin, Compass, Search, Globe } from 'lucide-react';
+import { Page, Stack, Grid, Col, Card, CardHeader, CardBody, Title, Text, Tag, Badge, Icon, Table, Thead, Tbody, Tr, Th, Td, ProgressBar } from '@pui/components';
+import { MapPin, Compass, Globe } from 'lucide-react';
 
 const SPATIAL_POINTS = [
   { id: 'SPT-01', lat: 37.7749, lon: -122.4194, label: 'SFO Terminal Hub', cluster: 'Cluster #A', similarity: 0.992 },
@@ -15,10 +15,10 @@ export const SpatialPage: React.FC = () => {
       <Stack direction="column" gap={4}>
         <Stack direction="row" justify="between" align="center">
           <Stack direction="column" gap={1}>
-            <Title level={2}>PhiOra Spatial & Vector Embeddings Explorer</Title>
-            <Text size="sm" variant="secondary">HNSW nearest-neighbor vector similarity clustering and GeoSpatial coordinate indexing.</Text>
+            <Title level={2} size="xl">PhiOra Spatial & Vector Embeddings Explorer</Title>
+            <Text size="md" intent="secondary">HNSW nearest-neighbor vector similarity clustering and GeoSpatial coordinate indexing.</Text>
           </Stack>
-          <Tag intent="primary" minimal round>
+          <Tag intent="primary" minimal round size="md">
             <Icon icon={Globe} size="xs" />
             Active CRS: EPSG:4326 (WGS84)
           </Tag>
@@ -27,10 +27,10 @@ export const SpatialPage: React.FC = () => {
         <Grid gap={3}>
           <Col span={7}>
             <Card variant="default">
-              <CardHeader action={<Tag intent="success" minimal round>HNSW Indexed</Tag>}>
+              <CardHeader action={<Tag intent="success" minimal round size="md">HNSW Indexed</Tag>}>
                 <Stack direction="row" align="center" gap={2}>
                   <Icon icon={Compass} size="sm" />
-                  <Title level={4} size="sm">Nearest-Neighbor Vector Clusters</Title>
+                  <Title level={4} size="md">Nearest-Neighbor Vector Clusters</Title>
                 </Stack>
               </CardHeader>
               <CardBody>
@@ -48,12 +48,12 @@ export const SpatialPage: React.FC = () => {
                     {SPATIAL_POINTS.map((pt) => (
                       <Tr key={pt.id}>
                         <Td><Badge variant="primary">{pt.id}</Badge></Td>
-                        <Td>{pt.label}</Td>
+                        <Td><Text size="sm">{pt.label}</Text></Td>
                         <Td><Tag intent="primary" minimal round size="sm">{pt.cluster}</Tag></Td>
-                        <Td><Text size="xs">{pt.lat.toFixed(4)}, {pt.lon.toFixed(4)}</Text></Td>
+                        <Td><Text size="sm" style={{ fontFamily: 'monospace' }}>{pt.lat.toFixed(4)}, {pt.lon.toFixed(4)}</Text></Td>
                         <Td>
                           <Stack direction="column" gap={1}>
-                            <Text size="xs">{pt.similarity.toFixed(3)}</Text>
+                            <Text size="sm" weight="medium">{pt.similarity.toFixed(3)}</Text>
                             <ProgressBar value={pt.similarity * 100} variant="success" size="sm" />
                           </Stack>
                         </Td>
@@ -66,21 +66,21 @@ export const SpatialPage: React.FC = () => {
           </Col>
 
           <Col span={5}>
-            <Card variant="flat">
+            <Card variant="flat" style={{ padding: '16px' }}>
               <CardHeader>
                 <Stack direction="row" align="center" gap={2}>
                   <Icon icon={MapPin} size="sm" />
-                  <Title level={5} size="sm">Git KV Content-Addressed Store</Title>
+                  <Title level={4} size="md">Git KV Content-Addressed Store</Title>
                 </Stack>
               </CardHeader>
               <CardBody>
                 <Stack direction="column" gap={2}>
-                  <Card variant="compact">
+                  <Card variant="compact" style={{ padding: '12px' }}>
                     <CardBody>
                       <Stack direction="column" gap={1}>
-                        <Text size="xs" variant="primary">Root Tree Hash: 0x8849...210f</Text>
-                        <Text size="xs" variant="muted">Commit ID: c_99182 · Author: phigit</Text>
-                        <Text size="xs" variant="secondary">Contains 4,820 coordinate blobs and HNSW adjacency lists.</Text>
+                        <Text size="sm" intent="primary" weight="medium">Root Tree Hash: 0x8849...210f</Text>
+                        <Text size="sm" intent="muted">Commit ID: c_99182 · Author: phigit</Text>
+                        <Text size="sm" intent="secondary">Contains 4,820 coordinate blobs and HNSW adjacency lists.</Text>
                       </Stack>
                     </CardBody>
                   </Card>

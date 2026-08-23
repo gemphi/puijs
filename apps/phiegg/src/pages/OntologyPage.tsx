@@ -15,8 +15,8 @@ export const OntologyPage: React.FC = () => {
       <Stack direction="column" gap={4}>
         <Stack direction="row" justify="between" align="center">
           <Stack direction="column" gap={1}>
-            <Title level={2}>POntology Graph & Object Explorer</Title>
-            <Text size="sm" variant="secondary">Palantir Workshop-symmetrical entity grid, link traversals, and action mutations.</Text>
+            <Title level={2} size="xl">POntology Graph & Object Explorer</Title>
+            <Text size="md" intent="secondary">Palantir Workshop-symmetrical entity grid, link traversals, and action mutations.</Text>
           </Stack>
           <Stack direction="row" gap={2}>
             {objectTypes.map((t) => (
@@ -38,20 +38,20 @@ export const OntologyPage: React.FC = () => {
           </Col>
 
           <Col span={4}>
-            <Card variant="flat">
+            <Card variant="flat" style={{ padding: '16px' }}>
               <CardHeader>
                 <Stack direction="row" align="center" gap={2}>
                   <Icon icon={Layers} size="sm" />
-                  <Title level={5} size="sm">Ontology Link Graph</Title>
+                  <Title level={4} size="md">Ontology Link Graph</Title>
                 </Stack>
               </CardHeader>
               <CardBody>
                 <Stack direction="column" gap={2}>
                   {linkTypes.map((link) => (
-                    <Card key={link.id} variant="compact">
+                    <Card key={link.id} variant="compact" style={{ padding: '10px 14px' }}>
                       <CardBody>
                         <Stack direction="row" justify="between" align="center">
-                          <Text size="xs" variant="primary">{link.sourceType} → {link.targetType}</Text>
+                          <Text size="sm" intent="primary" weight="medium">{link.sourceType} → {link.targetType}</Text>
                           <Badge variant="neutral" size="sm">{link.cardinality}</Badge>
                         </Stack>
                       </CardBody>

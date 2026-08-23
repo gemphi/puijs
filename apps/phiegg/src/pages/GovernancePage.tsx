@@ -1,6 +1,6 @@
 import React from 'react';
 import { Page, Stack, Card, CardHeader, CardBody, Title, Text, Tag, Badge, Icon, Table, Thead, Tbody, Tr, Th, Td } from '@pui/components';
-import { Shield, ShieldCheck, Lock, CheckCircle } from 'lucide-react';
+import { Shield, ShieldCheck, CheckCircle } from 'lucide-react';
 
 const AUDIT_RECORDS = [
   { id: 'AUD-901', time: '14:20:12', actor: 'phione', action: 'ROTATE_CREDENTIALS', target: 'User#882', status: 'VERIFIED', merkleProof: '0x33ee...881a' },
@@ -15,10 +15,10 @@ export const GovernancePage: React.FC = () => {
       <Stack direction="column" gap={4}>
         <Stack direction="row" justify="between" align="center">
           <Stack direction="column" gap={1}>
-            <Title level={2}>Cryptographic Governance & Audit Ledger</Title>
-            <Text size="sm" variant="secondary">Zero-trust immutable audit trails, Merkle proofs, and PII redaction policies.</Text>
+            <Title level={2} size="xl">Cryptographic Governance & Audit Ledger</Title>
+            <Text size="md" intent="secondary">Zero-trust immutable audit trails, Merkle proofs, and PII redaction policies.</Text>
           </Stack>
-          <Tag intent="success" minimal round>
+          <Tag intent="success" minimal round size="md">
             <Icon icon={ShieldCheck} size="xs" />
             Ledger Status: 100% Immutable
           </Tag>
@@ -28,13 +28,13 @@ export const GovernancePage: React.FC = () => {
           <CardHeader
             action={
               <Stack direction="row" align="center" gap={2}>
-                <Tag intent="primary" minimal round size="sm">Zero-Trust: Enforced</Tag>
+                <Tag intent="primary" minimal round size="md">Zero-Trust: Enforced</Tag>
               </Stack>
             }
           >
             <Stack direction="row" align="center" gap={2}>
-              <Icon icon={Shield} size="sm" />
-              <Title level={4} size="sm">Immutable Merkle Proof Ledger</Title>
+              <Icon icon={Shield} size="md" />
+              <Title level={4} size="md">Immutable Merkle Proof Ledger</Title>
             </Stack>
           </CardHeader>
           <CardBody>
@@ -54,17 +54,17 @@ export const GovernancePage: React.FC = () => {
                 {AUDIT_RECORDS.map((rec) => (
                   <Tr key={rec.id}>
                     <Td><Badge variant="primary">{rec.id}</Badge></Td>
-                    <Td><Text size="xs">{rec.time}</Text></Td>
+                    <Td><Text size="sm">{rec.time}</Text></Td>
                     <Td><Badge variant="neutral">{rec.actor}</Badge></Td>
                     <Td><Tag intent="primary" minimal round size="sm">{rec.action}</Tag></Td>
-                    <Td><Text size="xs">{rec.target}</Text></Td>
+                    <Td><Text size="sm">{rec.target}</Text></Td>
                     <Td>
                       <Tag intent="success" minimal round size="sm">
                         <Icon icon={CheckCircle} size="xs" />
                         {rec.status}
                       </Tag>
                     </Td>
-                    <Td><Text size="xs" variant="muted">{rec.merkleProof}</Text></Td>
+                    <Td><Text size="xs" intent="muted">{rec.merkleProof}</Text></Td>
                   </Tr>
                 ))}
               </Tbody>

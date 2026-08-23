@@ -27,8 +27,8 @@ export const DocsPage: React.FC = () => {
       <Stack direction="column" gap={4}>
         <Stack direction="row" justify="between" align="center">
           <Stack direction="column" gap={1}>
-            <Title level={2}>Palantir SDK & Platform Reference Portal</Title>
-            <Text size="sm" variant="secondary">
+            <Title level={2} size="xl">Palantir SDK & Platform Reference Portal</Title>
+            <Text size="md" intent="secondary">
               Interactive tri-pane documentation sandbox with real-time multi-language code generation.
             </Text>
           </Stack>

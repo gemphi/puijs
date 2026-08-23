@@ -1,6 +1,6 @@
 import React from 'react';
-import { Page, Stack, Grid, Col, Card, CardHeader, CardBody, Title, Text, Tag, Badge, Button, Icon, Callout, ProgressBar } from '@pui/components';
-import { GitBranch, Play, CheckCircle, Clock, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Page, Stack, Card, CardHeader, CardBody, Title, Text, Tag, Badge, Button, Icon, Callout, ProgressBar } from '@pui/components';
+import { GitBranch, Play, CheckCircle, Clock } from 'lucide-react';
 
 const PLAYBOOK_STEPS = [
   { step: 1, name: 'Ingest Radar Telemetry', agent: 'PhiOra', status: 'SUCCEEDED', duration: '14ms' },
@@ -16,19 +16,19 @@ export const OrchestrationPage: React.FC = () => {
       <Stack direction="column" gap={4}>
         <Stack direction="row" justify="between" align="center">
           <Stack direction="column" gap={1}>
-            <Title level={2}>AIP Logic & Playbook Orchestration Studio</Title>
-            <Text size="sm" variant="secondary">Monocle-grade DAG workflow execution, step-by-step telemetry, and state checkpoints.</Text>
+            <Title level={2} size="xl">AIP Logic & Playbook Orchestration Studio</Title>
+            <Text size="md" intent="secondary">Monocle-grade DAG workflow execution, step-by-step telemetry, and state checkpoints.</Text>
           </Stack>
           <Button variant="primary" size="md" icon={<Icon icon={Play} size="xs" />}>
             Trigger Playbook
           </Button>
         </Stack>
 
-        <Card variant="default">
-          <CardHeader action={<Badge variant="primary">Workflow: SyncGlobalFleet</Badge>}>
+        <Card variant="default" style={{ padding: '16px' }}>
+          <CardHeader action={<Badge variant="primary" size="md">Workflow: SyncGlobalFleet</Badge>}>
             <Stack direction="row" align="center" gap={2}>
-              <Icon icon={GitBranch} size="sm" />
-              <Title level={4} size="sm">Playbook Execution DAG (Step 4 of 5)</Title>
+              <Icon icon={GitBranch} size="md" />
+              <Title level={4} size="md">Playbook Execution DAG (Step 4 of 5)</Title>
             </Stack>
           </CardHeader>
           <CardBody>
@@ -53,7 +53,7 @@ export const OrchestrationPage: React.FC = () => {
                             {step.status}
                           </Tag>
                         </Stack>
-                        <Text size="xs" variant="muted">Duration: {step.duration}</Text>
+                        <Text size="xs" intent="muted">Duration: {step.duration}</Text>
                       </Stack>
                     </Callout>
                   );

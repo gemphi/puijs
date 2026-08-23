@@ -1,5 +1,5 @@
 import React from 'react';
-import { Page, Stack, Card, CardHeader, CardBody, Title, Text, Tag, Badge, Button, Input, Icon, Table, Thead, Tbody, Tr, Th, Td } from '@pui/components';
+import { Page, Stack, Card, CardHeader, CardBody, Title, Text, Tag, Badge, Button, Icon, Table, Thead, Tbody, Tr, Th, Td } from '@pui/components';
 import { useStore } from '@pui/store';
 import { streamStore } from '../state/streamStore';
 import { Radio, Play, Pause, Trash2, ShieldCheck, Activity } from 'lucide-react';
@@ -18,8 +18,8 @@ export const StreamsPage: React.FC = () => {
       <Stack direction="column" gap={4}>
         <Stack direction="row" justify="between" align="center">
           <Stack direction="column" gap={1}>
-            <Title level={2}>PhiBus Live Event Streaming Monitor</Title>
-            <Text size="sm" variant="secondary">Real-time Server-Sent Events (SSE) packet tailing, Merkle signatures, and event replay.</Text>
+            <Title level={2} size="xl">PhiBus Live Event Streaming Monitor</Title>
+            <Text size="md" intent="secondary">Real-time Server-Sent Events (SSE) packet tailing, Merkle signatures, and event replay.</Text>
           </Stack>
           <Stack direction="row" gap={2} align="center">
             <Button
@@ -53,7 +53,7 @@ export const StreamsPage: React.FC = () => {
           <CardHeader
             action={
               <Stack direction="row" align="center" gap={2}>
-                <Tag intent="success" minimal round size="sm">
+                <Tag intent="success" minimal round size="md">
                   <Icon icon={Activity} size="xs" />
                   Stream Rate: 14.8k evt/s
                 </Tag>
@@ -62,7 +62,7 @@ export const StreamsPage: React.FC = () => {
           >
             <Stack direction="row" align="center" gap={2}>
               <Icon icon={Radio} size="sm" />
-              <Title level={4} size="sm">Live Packet Waterfall ({filteredPackets.length})</Title>
+              <Title level={4} size="md">Live Packet Waterfall ({filteredPackets.length})</Title>
             </Stack>
           </CardHeader>
           <CardBody>
@@ -81,14 +81,14 @@ export const StreamsPage: React.FC = () => {
                 {filteredPackets.map((pkt) => (
                   <Tr key={pkt.id}>
                     <Td><Badge variant="neutral">#{pkt.sequence}</Badge></Td>
-                    <Td><Text size="xs">{pkt.timestamp}</Text></Td>
+                    <Td><Text size="sm">{pkt.timestamp}</Text></Td>
                     <Td><Tag intent="primary" minimal round size="sm">{pkt.taxonomy}</Tag></Td>
                     <Td><Badge variant="primary">{pkt.source}</Badge></Td>
-                    <Td><Text size="xs" variant="secondary">{JSON.stringify(pkt.payload)}</Text></Td>
+                    <Td><Text size="sm" intent="secondary" style={{ fontFamily: 'monospace' }}>{JSON.stringify(pkt.payload)}</Text></Td>
                     <Td>
                       <Stack direction="row" align="center" gap={1}>
                         <Icon icon={ShieldCheck} size="xs" />
-                        <Text size="xs" variant="muted">{pkt.merkleSignature}</Text>
+                        <Text size="xs" intent="muted">{pkt.merkleSignature}</Text>
                       </Stack>
                     </Td>
                   </Tr>

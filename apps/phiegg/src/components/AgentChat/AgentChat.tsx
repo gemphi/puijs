@@ -15,11 +15,11 @@ export const AgentChat: React.FC = () => {
   };
 
   return (
-    <Card variant="default">
+    <Card variant="default" style={{ padding: '16px' }}>
       <CardHeader
         action={
           <Stack direction="row" align="center" gap={2}>
-            <Tag intent="primary" minimal round size="sm">
+            <Tag intent="primary" minimal round size="md">
               Target: {selectedAgentId}
             </Tag>
             {isStreaming && <Spinner size="sm" />}
@@ -27,13 +27,13 @@ export const AgentChat: React.FC = () => {
         }
       >
         <Stack direction="row" align="center" gap={2}>
-          <Icon icon={Terminal} size="sm" />
-          <Title level={4} size="sm">AIP Multi-Turn Chat & Trace Console</Title>
+          <Icon icon={Terminal} size="md" />
+          <Title level={3} size="md">AIP Multi-Turn Chat & Trace Console</Title>
         </Stack>
       </CardHeader>
 
       <CardBody>
-        <Stack direction="column" gap={3} style={{ maxHeight: '420px', overflowY: 'auto' }}>
+        <Stack direction="column" gap={3} style={{ maxHeight: '460px', overflowY: 'auto', paddingRight: '4px' }}>
           {chatMessages.map((msg) => {
             const isAgent = msg.sender === 'agent';
             const isUser = msg.sender === 'user';
@@ -44,21 +44,21 @@ export const AgentChat: React.FC = () => {
                 title={isAgent ? `Agent [${msg.agentId || 'System'}]` : isUser ? 'Operator' : 'System Notice'}
                 icon={<Icon icon={isAgent ? Bot : User} size="sm" />}
               >
-                <Stack direction="column" gap={1}>
-                  <Text size="sm">{msg.content}</Text>
+                <Stack direction="column" gap={2}>
+                  <Text size="md" style={{ lineHeight: '1.5' }}>{msg.content}</Text>
                   {msg.traces && (
-                    <Stack direction="column" gap={1} style={{ marginTop: 6 }}>
-                      <Text size="xs" variant="muted">Execution Trace Receipts:</Text>
+                    <Stack direction="column" gap={1} style={{ marginTop: 6, background: 'rgba(0,0,0,0.2)', padding: '8px 12px', borderRadius: '6px' }}>
+                      <Text size="xs" weight="semibold" intent="secondary">Execution Trace Receipts:</Text>
                       {msg.traces.map((trace) => (
                         <Stack key={trace.step} direction="row" align="center" gap={2}>
                           <Icon icon={CheckCircle} size="xs" />
                           <Badge variant="neutral" size="sm">Step {trace.step}: {trace.toolName}</Badge>
-                          <Text size="xs" variant="muted">{trace.durationMs}ms</Text>
+                          <Text size="xs" intent="muted">{trace.durationMs}ms</Text>
                         </Stack>
                       ))}
                     </Stack>
                   )}
-                  <Text size="xs" variant="muted">{msg.timestamp}</Text>
+                  <Text size="xs" intent="muted">{msg.timestamp}</Text>
                 </Stack>
               </Callout>
             );
@@ -67,13 +67,14 @@ export const AgentChat: React.FC = () => {
       </CardBody>
 
       <CardFooter>
-        <Stack direction="row" gap={2} align="center" style={{ width: '100%' }}>
+        <Stack direction="row" gap={2} align="center" style={{ width: '100%', marginTop: '8px' }}>
           <Input
             placeholder={`Ask ${selectedAgentId} or dispatch action...`}
             value={activePrompt}
             onChange={(e) => setPrompt(e.target.value)}
             onKeyDown={handleKeyDown}
             disabled={isStreaming}
+            style={{ fontSize: '14px' }}
           />
           <Button
             variant="primary"

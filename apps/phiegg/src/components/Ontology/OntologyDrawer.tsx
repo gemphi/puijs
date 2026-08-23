@@ -17,20 +17,20 @@ export const OntologyDrawer: React.FC<OntologyDrawerProps> = ({ selectedInstance
       title={`Object Detail: ${selectedInstance?.id || ''}`}
     >
       <Stack direction="column" gap={3}>
-        <Text size="sm" variant="secondary">Inspecting live object properties and linked actions.</Text>
-        <Card variant="compact">
+        <Text size="md" intent="secondary">Inspecting live object properties and linked actions.</Text>
+        <Card variant="compact" style={{ padding: '14px' }}>
           <CardBody>
-            <Stack direction="column" gap={1}>
-              <Text size="xs">Tail Number: {selectedInstance?.tail}</Text>
-              <Text size="xs">Route: {selectedInstance?.origin} → {selectedInstance?.dest}</Text>
-              <Text size="xs">Status: {selectedInstance?.status}</Text>
-              <Text size="xs">Altitude: {selectedInstance?.alt} ft</Text>
+            <Stack direction="column" gap={2}>
+              <Text size="sm" weight="medium">Tail Number: {selectedInstance?.tail}</Text>
+              <Text size="sm" weight="medium">Route: {selectedInstance?.origin} → {selectedInstance?.dest}</Text>
+              <Text size="sm" weight="medium">Status: {selectedInstance?.status}</Text>
+              <Text size="sm" weight="medium">Altitude: {selectedInstance?.alt} ft</Text>
             </Stack>
           </CardBody>
         </Card>
-        <Title level={5} size="sm">Available Morphism Actions</Title>
+        <Title level={4} size="md">Available Morphism Actions</Title>
         {actions.map((act) => (
-          <Button key={act.id} variant="primary" size="sm" icon={<Icon icon={Zap} size="xs" />}>
+          <Button key={act.id} variant="primary" size="md" icon={<Icon icon={Zap} size="sm" />}>
             Execute: {act.displayName}
           </Button>
         ))}

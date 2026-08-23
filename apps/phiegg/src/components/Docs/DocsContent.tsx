@@ -16,24 +16,24 @@ export const DocsContent: React.FC<DocsContentProps> = ({ endpoint, activeLangua
   };
 
   return (
-    <Card variant="default">
-      <CardHeader action={<Tag intent="primary" minimal round>{endpoint.method}</Tag>}>
+    <Card variant="default" style={{ padding: '16px' }}>
+      <CardHeader action={<Tag intent="primary" minimal round size="md">{endpoint.method}</Tag>}>
         <Stack direction="row" align="center" gap={2}>
-          <Icon icon={BookOpen} size="sm" />
-          <Title level={4} size="sm">{endpoint.summary}</Title>
+          <Icon icon={BookOpen} size="md" />
+          <Title level={4} size="md">{endpoint.summary}</Title>
         </Stack>
       </CardHeader>
       <CardBody>
         <Stack direction="column" gap={3}>
-          <Text size="sm">{endpoint.description}</Text>
-          <Card variant="compact">
+          <Text size="md" intent="secondary">{endpoint.description}</Text>
+          <Card variant="compact" style={{ padding: '10px 14px' }}>
             <CardBody>
-              <Text size="xs" variant="primary">Path: {endpoint.path}</Text>
+              <Text size="sm" intent="primary" weight="medium" style={{ fontFamily: 'monospace' }}>Path: {endpoint.path}</Text>
             </CardBody>
           </Card>
           <Title level={5} size="sm">SDK Code Snippet ({activeLanguage.toUpperCase()})</Title>
           <Callout intent="primary" icon={<Icon icon={Code} size="sm" />}>
-            <Text size="xs" style={{ fontFamily: 'monospace', whiteSpace: 'pre-wrap' }}>
+            <Text size="sm" style={{ fontFamily: 'monospace', whiteSpace: 'pre-wrap', lineHeight: '1.6' }}>
               {getCodeSnippet()}
             </Text>
           </Callout>

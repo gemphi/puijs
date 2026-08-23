@@ -29,38 +29,41 @@ export const AgentCard: React.FC<AgentCardProps> = ({ agent, isSelected, onSelec
       selected={isSelected}
       hoverable
       onClick={() => onSelect(agent.id)}
+      style={{ padding: '16px' }}
     >
       <CardHeader
         action={
-          <Tag intent={getIntent()} minimal round size="sm">
+          <Tag intent={getIntent()} minimal round size="md">
             <Icon icon={getStatusIcon()} size="xs" />
-            <Text size="xs">{agent.status}</Text>
+            <Text size="sm" weight="semibold" style={{ marginLeft: 4 }}>{agent.status}</Text>
           </Tag>
         }
       >
         <Stack direction="row" align="center" gap={2}>
-          <Icon icon={Bot} size="sm" />
-          <Title level={5} size="sm">{agent.name}</Title>
-          <Badge variant="neutral" size="sm">{agent.tag}</Badge>
+          <Icon icon={Bot} size="md" />
+          <Title level={4} size="md">{agent.name}</Title>
+          <Badge variant="primary" size="sm">{agent.tag}</Badge>
         </Stack>
       </CardHeader>
 
       <CardBody>
         <Stack direction="column" gap={2}>
-          <Text size="xs" variant="secondary">{agent.description}</Text>
+          <Text size="sm" intent="secondary" style={{ minHeight: '38px', lineHeight: '1.5' }}>
+            {agent.description}
+          </Text>
 
           <Stack direction="row" justify="between" align="center">
             <Stack direction="row" align="center" gap={1}>
-              <Icon icon={Clock} size="xs" />
-              <Text size="xs">{agent.latencyMs} ms</Text>
+              <Icon icon={Clock} size="sm" />
+              <Text size="sm" weight="medium">{agent.latencyMs} ms</Text>
             </Stack>
             <Stack direction="row" align="center" gap={1}>
-              <Icon icon={Zap} size="xs" />
-              <Text size="xs">r = {agent.orderParam.toFixed(3)}</Text>
+              <Icon icon={Zap} size="sm" />
+              <Text size="sm" weight="medium">r = {agent.orderParam.toFixed(3)}</Text>
             </Stack>
             <Stack direction="row" align="center" gap={1}>
-              <Icon icon={Cpu} size="xs" />
-              <Text size="xs">{agent.memoryMb} MB</Text>
+              <Icon icon={Cpu} size="sm" />
+              <Text size="sm" weight="medium">{agent.memoryMb} MB</Text>
             </Stack>
           </Stack>
 
@@ -69,8 +72,8 @@ export const AgentCard: React.FC<AgentCardProps> = ({ agent, isSelected, onSelec
       </CardBody>
 
       <CardFooter>
-        <Stack direction="row" justify="between" align="center" style={{ width: '100%' }}>
-          <Text size="xs" variant="muted">Uptime: {agent.uptime}</Text>
+        <Stack direction="row" justify="between" align="center" style={{ width: '100%', marginTop: '6px' }}>
+          <Text size="sm" intent="muted">Uptime: {agent.uptime}</Text>
           <Button
             size="sm"
             variant={isSelected ? 'primary' : 'ghost'}

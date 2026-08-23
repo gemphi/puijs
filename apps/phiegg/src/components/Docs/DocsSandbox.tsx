@@ -10,7 +10,7 @@ interface DocsSandboxProps {
 
 export const DocsSandbox: React.FC<DocsSandboxProps> = ({ isRunning, liveResponse, onRunEndpoint }) => {
   return (
-    <Card variant="default">
+    <Card variant="default" style={{ padding: '16px' }}>
       <CardHeader
         action={
           <Button
@@ -25,8 +25,8 @@ export const DocsSandbox: React.FC<DocsSandboxProps> = ({ isRunning, liveRespons
         }
       >
         <Stack direction="row" align="center" gap={2}>
-          <Icon icon={Terminal} size="sm" />
-          <Title level={5} size="sm">Live Sandbox</Title>
+          <Icon icon={Terminal} size="md" />
+          <Title level={4} size="md">Live Sandbox</Title>
         </Stack>
       </CardHeader>
       <CardBody>
@@ -34,16 +34,16 @@ export const DocsSandbox: React.FC<DocsSandboxProps> = ({ isRunning, liveRespons
           {isRunning ? (
             <Stack direction="row" align="center" justify="center" gap={2} style={{ padding: 24 }}>
               <Spinner size="md" />
-              <Text size="sm">Calling endpoint...</Text>
+              <Text size="md">Calling endpoint...</Text>
             </Stack>
           ) : liveResponse ? (
             <Callout intent="success" title="200 OK — Execution Response" icon={<Icon icon={CheckCircle} size="sm" />}>
-              <Text size="xs" style={{ fontFamily: 'monospace', whiteSpace: 'pre-wrap' }}>
+              <Text size="sm" style={{ fontFamily: 'monospace', whiteSpace: 'pre-wrap', lineHeight: '1.6' }}>
                 {JSON.stringify(liveResponse, null, 2)}
               </Text>
             </Callout>
           ) : (
-            <Text size="xs" variant="muted">Click "Run Request" to execute this API endpoint against the live engine.</Text>
+            <Text size="sm" intent="muted">Click "Run Request" to execute this API endpoint against the live engine.</Text>
           )}
         </Stack>
       </CardBody>
