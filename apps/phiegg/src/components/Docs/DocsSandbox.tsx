@@ -37,7 +37,7 @@ export const DocsSandbox: React.FC<DocsSandboxProps> = ({ isRunning, liveRespons
               <Text size="md">Calling endpoint...</Text>
             </Stack>
           ) : liveResponse ? (
-            <Callout intent="success" title="200 OK — Execution Response" icon={<Icon icon={CheckCircle} size="sm" />}>
+            <Callout intent="success" title="200 OK - Execution Response" icon={<Icon icon={CheckCircle} size="sm" />}>
               <Text size="sm" style={{ fontFamily: 'monospace', whiteSpace: 'pre-wrap', lineHeight: '1.6' }}>
                 {JSON.stringify(liveResponse, null, 2)}
               </Text>
