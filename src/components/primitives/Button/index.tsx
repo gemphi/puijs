@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import { Loader2, type LucideIcon } from 'lucide-react';
 import { cn } from '../../../utils/cn';
 import { BUTTON_SIZES, BUTTON_VARIANTS, type ButtonSize, type ButtonVariant } from './constants';
@@ -79,9 +78,9 @@ export const Button = ({
   if ('href' in props && props.href) {
     const { href, ...linkProps } = props as ButtonAsLink;
     return (
-      <Link href={href} className={classes} {...linkProps}>
+      <a href={href} className={classes} {...linkProps}>
         {content}
-      </Link>
+      </a>
     );
   }
 
