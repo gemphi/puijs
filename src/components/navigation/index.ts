@@ -7,3 +7,4 @@ export * from './TabList';
 export * from './Pagination';
 export * from './Navbar';
 export * from './SidebarNav';
+export * from './BrandSelector';

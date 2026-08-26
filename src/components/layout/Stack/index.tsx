@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn } from '../../../utils/cn';
+import { StyleProps, stylePropsToCSS } from '../../shared/styleProps';
 import styles from './styles.module.scss';
 
 export type StackDirection = 'row' | 'column' | 'row-reverse' | 'column-reverse';
@@ -13,7 +14,7 @@ type StackProps = React.HTMLAttributes<HTMLDivElement> & {
   justify?: StackJustify;
   wrap?: boolean;
   ref?: React.Ref<HTMLDivElement>;
-};
+} & StyleProps;
 
 const justifyMap: Record<StackJustify, React.CSSProperties['justifyContent']> = {
   start: 'flex-start',
@@ -43,17 +44,21 @@ export const Stack = React.forwardRef<HTMLDivElement, StackProps>(({
   style,
   ...props
 }, ref) => {
+  const stylePropsCSS = stylePropsToCSS(props);
   const computedStyle: React.CSSProperties = {
     flexDirection: direction,
     alignItems: alignMap[align],
     justifyContent: justifyMap[justify],
     flexWrap: wrap ? 'wrap' : 'nowrap',
     gap: `${gap * 0.25}rem`,
+    ...stylePropsCSS,
     ...style,
   };
 
+  const { background, padding, paddingTop, paddingBottom, paddingLeft, paddingRight, paddingX, paddingY, margin, marginTop, marginBottom, color, maxWidth, minWidth, minHeight, align: _align, textDecoration, opacity, textTransform, letterSpacing, ...rest } = props;
+
   return (
-    <div ref={ref} className={cn(styles.stack, className)} style={computedStyle} {...props}>
+    <div ref={ref} className={cn(styles.stack, className)} style={computedStyle} {...rest}>
       {children}
     </div>
   );

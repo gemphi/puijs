@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn } from '../../../utils/cn';
+import { StyleProps, stylePropsToCSS } from '../../shared/styleProps';
 import styles from './styles.module.scss';
 
 export const LINK_VARIANTS = {
@@ -16,14 +17,20 @@ type LinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   active?: boolean;
   className?: string;
   children?: React.ReactNode;
-};
+} & StyleProps;
 
-export const Link = ({ href, variant = LINK_VARIANTS.DEFAULT, active = false, className = '', children, ...props }: LinkProps) => {
+export const Link = ({ href, variant = LINK_VARIANTS.DEFAULT, active = false, className = '', style, children, ...props }: LinkProps) => {
+  const stylePropsCSS = stylePropsToCSS(props);
+  const computedStyle = { ...stylePropsCSS, ...style };
+
+  const { background, padding, paddingTop, paddingBottom, paddingLeft, paddingRight, paddingX, paddingY, margin, marginTop, marginBottom, color, maxWidth, minWidth, minHeight, align, textDecoration, opacity, textTransform, letterSpacing, ...rest } = props;
+
   return (
     <a
       href={href}
       className={cn(styles.link, styles[variant], active && styles.active, className)}
-      {...props}
+      style={computedStyle}
+      {...rest}
     >
       {children}
     </a>

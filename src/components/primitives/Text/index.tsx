@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn } from '../../../utils/cn';
+import { StyleProps, stylePropsToCSS } from '../../shared/styleProps';
 import styles from './styles.module.scss';
 
 export type TextIntent =
@@ -23,7 +24,7 @@ export type TextProps = React.HTMLAttributes<HTMLParagraphElement> & {
   align?: TextAlign;
   as?: 'p' | 'span' | 'div' | 'label';
   children?: React.ReactNode;
-};
+} & StyleProps;
 
 export const Text = ({
   intent,
@@ -33,10 +34,15 @@ export const Text = ({
   align = 'left',
   as: Component = 'p',
   className = '',
+  style,
   children,
   ...props
 }: TextProps) => {
   const resolvedIntent = intent || variant || 'default';
+  const stylePropsCSS = stylePropsToCSS(props);
+  const computedStyle = { ...stylePropsCSS, ...style };
+
+  const { background, padding, paddingTop, paddingBottom, paddingLeft, paddingRight, paddingX, paddingY, margin, marginTop, marginBottom, color, maxWidth, minWidth, minHeight, align: _align, textDecoration, opacity, textTransform, letterSpacing, ...rest } = props;
 
   return (
     <Component
@@ -48,7 +54,8 @@ export const Text = ({
         styles[`align-${align}`],
         className
       )}
-      {...props}
+      style={computedStyle}
+      {...rest}
     >
       {children}
     </Component>
