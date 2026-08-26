@@ -1,8 +1,9 @@
 :root {
-  --phi-color-primary: #3b82f6;
-  --phi-color-primary-hover: #2563eb;
+  /* Brand colors (Default: edX Paragon / Phixum Blue) */
+  --phi-color-primary: #0284c7;
+  --phi-color-primary-hover: #0369a1;
   --phi-color-primary-light: #eff6ff;
-  --phi-color-primary-dark: #1d4ed8;
+  --phi-color-primary-dark: #075985;
 
   --phi-color-secondary: #475569;
   --phi-color-secondary-hover: #334155;
@@ -40,33 +41,39 @@
   --phi-color-background-secondary: var(--phi-color-gray-50);
   --phi-color-background-card: #ffffff;
   --phi-color-text-primary: var(--phi-color-gray-900);
-  --phi-color-text-secondary: var(--phi-color-gray-500);
+  --phi-color-text-secondary: var(--phi-color-gray-600);
   --phi-color-text-muted: var(--phi-color-gray-400);
   --phi-color-text-inverse: #ffffff;
   --phi-color-border: var(--phi-color-gray-200);
   --phi-color-border-subtle: var(--phi-color-gray-100);
 
+  /* Shadows */
   --phi-shadow-0: none;
-  --phi-shadow-1: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
-  --phi-shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --phi-shadow-3: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  --phi-shadow-4: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  --phi-shadow-1: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.06);
+  --phi-shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+  --phi-shadow-3: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
+  --phi-shadow-4: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
 
-  --phi-surface-gradient: var(--phi-color-background);
-  --phi-surface-gradient-reverse: var(--phi-color-background);
-  --phi-elevation-border: 1px solid var(--phi-color-border);
-  --phi-elevation-shadow: var(--phi-shadow-1);
-  --phi-glass-blur: 0px;
-  --phi-glass-opacity: 1;
-  --phi-brand-gradient: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+  /* Top-to-Bottom Surface Gradients */
+  --phi-gradient-main: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  --phi-gradient-main-lr: linear-gradient(to right, #ffffff 0%, #f8fafc 100%);
+  --phi-gradient-card: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
+  --phi-gradient-navbar: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  --phi-gradient-sidebar: linear-gradient(to right, #f8fafc 0%, #ffffff 100%);
+  --phi-gradient-accent: linear-gradient(to right, #eff6ff 0%, #e0e7ff 100%);
+  --phi-gradient-table-header: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
 
+  /* Unified Rounding Tokens */
   --phi-radius-none: 0px;
-  --phi-radius-sm: 4px;
-  --phi-radius-md: 6px;
-  --phi-radius-lg: 8px;
+  --phi-radius-xs: 4px;
+  --phi-radius-sm: 6px;
+  --phi-radius-md: 8px;
+  --phi-radius-lg: 10px;
   --phi-radius-xl: 12px;
+  --phi-radius-2xl: 16px;
   --phi-radius-full: 9999px;
 
+  /* Spacing */
   --phi-space-1: 4px;
   --phi-space-2: 8px;
   --phi-space-3: 12px;
@@ -76,30 +83,86 @@
   --phi-space-8: 48px;
   --phi-space-10: 64px;
 
-  --phi-layout-sidebar-margin: 12px;
-  --phi-layout-header-height: 56px;
-  --phi-layout-content-padding: 24px;
-  --phi-sidebar-collapsed-width: 64px;
-  --phi-sidebar-expanded-width: 250px;
-
-  --phi-transition-fast: 0.1s ease;
+  --phi-transition-fast: 0.12s ease;
   --phi-transition-normal: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   --phi-transition-slow: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
+  /* Refined, Crisp Typography */
   --phi-font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
-  --phi-font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --phi-font-heading: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
   --phi-font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', 'Consolas', monospace;
 
   --phi-font-size-xs: 0.75rem;
   --phi-font-size-sm: 0.8125rem;
   --phi-font-size-base: 0.875rem;
-  --phi-font-size-lg: 1rem;
-  --phi-font-size-xl: 1.125rem;
+  --phi-font-size-lg: 0.9375rem;
+  --phi-font-size-xl: 1.0625rem;
   --phi-font-size-2xl: 1.25rem;
   --phi-font-size-3xl: 1.5rem;
 
   --phi-font-weight-normal: 400;
   --phi-font-weight-medium: 500;
-  --phi-font-weight-semibold: 600;
-  --phi-font-weight-bold: 700;
+  --phi-font-weight-semibold: 550;
+  --phi-font-weight-bold: 600;
+
+  /* Docusaurus Compatibility Invariants */
+  --ifm-color-primary: var(--phi-color-primary);
+  --ifm-color-primary-dark: var(--phi-color-primary-hover);
+  --ifm-color-primary-darker: var(--phi-color-primary-dark);
+  --ifm-color-primary-darkest: var(--phi-color-primary-dark);
+  --ifm-color-primary-light: var(--phi-color-primary-light);
+  --ifm-color-primary-lighter: var(--phi-color-primary-light);
+  --ifm-color-primary-lightest: var(--phi-color-primary-light);
+  --ifm-font-family-base: var(--phi-font-family);
+  --ifm-font-family-monospace: var(--phi-font-mono);
+  --ifm-heading-font-family: var(--phi-font-heading);
+  --ifm-heading-font-weight: 550;
+  --ifm-font-weight-base: 400;
+  --ifm-button-border-radius: var(--phi-radius-md);
+  --ifm-card-border-radius: var(--phi-radius-xl);
+  --ifm-line-height-base: 1.65;
+  --ifm-background-color: transparent;
+  --ifm-navbar-background-color: transparent;
+  --ifm-footer-background-color: transparent;
+}
+
+[data-theme='dark'] {
+  --phi-color-primary: #38bdf8;
+  --phi-color-primary-hover: #0284c7;
+  --phi-color-primary-light: #082f49;
+  --phi-color-primary-dark: #7dd3fc;
+  --phi-color-secondary: #94a3b8;
+  --phi-color-secondary-hover: #cbd5e1;
+  --phi-color-secondary-light: #1e293b;
+
+  --phi-color-gray-50: #020617;
+  --phi-color-gray-100: #0b0f19;
+  --phi-color-gray-200: #1e293b;
+  --phi-color-gray-300: #334155;
+  --phi-color-gray-400: #475569;
+  --phi-color-gray-500: #64748b;
+  --phi-color-gray-600: #94a3b8;
+  --phi-color-gray-700: #cbd5e1;
+  --phi-color-gray-800: #e2e8f0;
+  --phi-color-gray-900: #f1f5f9;
+  --phi-color-gray-950: #f8fafc;
+
+  --phi-color-background: #0b0f19;
+  --phi-color-background-secondary: #0f172a;
+  --phi-color-background-card: #0f172a;
+
+  --phi-gradient-main: linear-gradient(180deg, #0b0f19 0%, #0f172a 100%);
+  --phi-gradient-main-lr: linear-gradient(to right, #0b0f19 0%, #0f172a 100%);
+  --phi-gradient-card: linear-gradient(180deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
+  --phi-gradient-navbar: linear-gradient(180deg, rgba(11, 15, 25, 0.92) 0%, rgba(15, 23, 42, 0.88) 100%);
+  --phi-gradient-sidebar: linear-gradient(to right, rgba(11, 15, 25, 0.95) 0%, rgba(15, 23, 42, 0.9) 100%);
+  --phi-gradient-accent: linear-gradient(to right, rgba(2, 132, 199, 0.15) 0%, rgba(56, 189, 248, 0.08) 100%);
+  --phi-gradient-table-header: linear-gradient(180deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+
+  --phi-color-text-primary: #f8fafc;
+  --phi-color-text-secondary: #cbd5e1;
+  --phi-color-text-muted: #64748b;
+  --phi-color-text-inverse: #0b0f19;
+  --phi-color-border: rgba(255, 255, 255, 0.08);
+  --phi-color-border-subtle: rgba(255, 255, 255, 0.04);
 }
