@@ -1,3 +1,48 @@
 .stack {
   display: flex;
+  flex-direction: var(--stack-direction, column);
+  align-items: var(--stack-align, stretch);
+  justify-content: var(--stack-justify, flex-start);
+  flex-wrap: var(--stack-wrap, nowrap);
+  gap: var(--stack-gap, 0.5rem);
+}
+
+@media (min-width: 576px) {
+  .stack {
+    flex-direction: var(--stack-direction-sm, var(--stack-direction, column));
+    align-items: var(--stack-align-sm, var(--stack-align, stretch));
+    justify-content: var(--stack-justify-sm, var(--stack-justify, flex-start));
+    flex-wrap: var(--stack-wrap-sm, var(--stack-wrap, nowrap));
+    gap: var(--stack-gap-sm, var(--stack-gap, 0.5rem));
+  }
+}
+
+@media (min-width: 768px) {
+  .stack {
+    flex-direction: var(--stack-direction-md, var(--stack-direction-sm, var(--stack-direction, column)));
+    align-items: var(--stack-align-md, var(--stack-align-sm, var(--stack-align, stretch)));
+    justify-content: var(--stack-justify-md, var(--stack-justify-sm, var(--stack-justify, flex-start)));
+    flex-wrap: var(--stack-wrap-md, var(--stack-wrap-sm, var(--stack-wrap, nowrap)));
+    gap: var(--stack-gap-md, var(--stack-gap-sm, var(--stack-gap, 0.5rem)));
+  }
+}
+
+@media (min-width: 992px) {
+  .stack {
+    flex-direction: var(--stack-direction-lg, var(--stack-direction-md, var(--stack-direction-sm, var(--stack-direction, column))));
+    align-items: var(--stack-align-lg, var(--stack-align-md, var(--stack-align-sm, var(--stack-align, stretch))));
+    justify-content: var(--stack-justify-lg, var(--stack-justify-md, var(--stack-justify-sm, var(--stack-justify, flex-start))));
+    flex-wrap: var(--stack-wrap-lg, var(--stack-wrap-md, var(--stack-wrap-sm, var(--stack-wrap, nowrap))));
+    gap: var(--stack-gap-lg, var(--stack-gap-md, var(--stack-gap-sm, var(--stack-gap, 0.5rem))));
+  }
+}
+
+@media (min-width: 1200px) {
+  .stack {
+    flex-direction: var(--stack-direction-xl, var(--stack-direction-lg, var(--stack-direction-md, var(--stack-direction-sm, var(--stack-direction, column)))));
+    align-items: var(--stack-align-xl, var(--stack-align-lg, var(--stack-align-md, var(--stack-align-sm, var(--stack-align, stretch)))));
+    justify-content: var(--stack-justify-xl, var(--stack-justify-lg, var(--stack-justify-md, var(--stack-justify-sm, var(--stack-justify, flex-start)))));
+    flex-wrap: var(--stack-wrap-xl, var(--stack-wrap-lg, var(--stack-wrap-md, var(--stack-wrap-sm, var(--stack-wrap, nowrap)))));
+    gap: var(--stack-gap-xl, var(--stack-gap-lg, var(--stack-gap-md, var(--stack-gap-sm, var(--stack-gap, 0.5rem)))));
+  }
 }

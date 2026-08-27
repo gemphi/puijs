@@ -1,0 +1,89 @@
+:root[data-theme-style='apple'] {
+  color-scheme: light;
+  --phi-color-background: #f5f5f7;
+  --phi-color-background-secondary: #ffffff;
+  --phi-color-background-card: rgba(255, 255, 255, 0.78);
+  --phi-color-border: rgba(0, 0, 0, 0.08);
+  --phi-color-border-subtle: rgba(0, 0, 0, 0.04);
+  --phi-radius-xs: 6px;
+  --phi-radius-sm: 8px;
+  --phi-radius-md: 12px;
+  --phi-radius-lg: 16px;
+  --phi-radius-xl: 20px;
+  --phi-radius-2xl: 24px;
+  --phi-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.05), 0 1px 8px rgba(0, 0, 0, 0.04);
+  --phi-shadow-2: 0 4px 16px rgba(0, 0, 0, 0.08), 0 1px 4px rgba(0, 0, 0, 0.04);
+  --phi-shadow-3: 0 12px 32px rgba(0, 0, 0, 0.10), 0 4px 12px rgba(0, 0, 0, 0.05);
+  --phi-shadow-4: 0 24px 48px rgba(0, 0, 0, 0.14), 0 8px 20px rgba(0, 0, 0, 0.06);
+  --phi-gradient-main: linear-gradient(180deg, #f5f5f7 0%, #ffffff 100%);
+  --phi-gradient-main-lr: linear-gradient(to right, #f5f5f7 0%, #ffffff 100%);
+  --phi-gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.96) 0%, rgba(245, 245, 247, 0.88) 100%);
+  --phi-gradient-navbar: linear-gradient(180deg, rgba(255, 255, 255, 0.86) 0%, rgba(245, 245, 247, 0.76) 100%);
+  --phi-gradient-sidebar: linear-gradient(to right, rgba(245, 245, 247, 0.92) 0%, rgba(255, 255, 255, 0.82) 100%);
+  --phi-gradient-table-header: linear-gradient(180deg, rgba(245, 245, 247, 0.95) 0%, rgba(235, 235, 240, 0.9) 100%);
+  --phi-glass-surface: rgba(255, 255, 255, 0.72);
+  --phi-glass-border: rgba(255, 255, 255, 0.6);
+  --phi-backdrop-blur: blur(20px) saturate(180%);
+}
+
+:root[data-theme='dark'][data-theme-style='apple'],
+:root.dark[data-theme-style='apple'] {
+  color-scheme: dark;
+  --phi-color-background: #000000;
+  --phi-color-background-secondary: #1c1c1e;
+  --phi-color-background-card: rgba(28, 28, 30, 0.78);
+  --phi-color-border: rgba(255, 255, 255, 0.12);
+  --phi-color-border-subtle: rgba(255, 255, 255, 0.06);
+  --phi-shadow-1: 0 1px 2px rgba(0, 0, 0, 0.45), 0 1px 8px rgba(0, 0, 0, 0.35);
+  --phi-shadow-2: 0 4px 16px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.4);
+  --phi-shadow-3: 0 12px 32px rgba(0, 0, 0, 0.58), 0 4px 12px rgba(0, 0, 0, 0.45);
+  --phi-shadow-4: 0 24px 48px rgba(0, 0, 0, 0.68), 0 8px 20px rgba(0, 0, 0, 0.5);
+  --phi-gradient-main: linear-gradient(180deg, #000000 0%, #1c1c1e 100%);
+  --phi-gradient-main-lr: linear-gradient(to right, #000000 0%, #1c1c1e 100%);
+  --phi-gradient-card: linear-gradient(180deg, rgba(44, 44, 46, 0.88) 0%, rgba(28, 28, 30, 0.82) 100%);
+  --phi-gradient-navbar: linear-gradient(180deg, rgba(28, 28, 30, 0.86) 0%, rgba(0, 0, 0, 0.76) 100%);
+  --phi-gradient-sidebar: linear-gradient(to right, rgba(28, 28, 30, 0.9) 0%, rgba(0, 0, 0, 0.82) 100%);
+  --phi-gradient-table-header: linear-gradient(180deg, rgba(44, 44, 46, 0.92) 0%, rgba(28, 28, 30, 0.88) 100%);
+  --phi-glass-surface: rgba(28, 28, 30, 0.68);
+  --phi-glass-border: rgba(255, 255, 255, 0.12);
+}
+
+:root[data-theme-style='glass'] {
+  --phi-radius-md: 12px;
+  --phi-radius-lg: 18px;
+  --phi-radius-xl: 24px;
+  --phi-radius-2xl: 32px;
+  --phi-gradient-card: linear-gradient(180deg, rgba(255, 255, 255, 0.68) 0%, rgba(255, 255, 255, 0.48) 100%);
+  --phi-glass-surface: rgba(255, 255, 255, 0.64);
+  --phi-glass-border: rgba(255, 255, 255, 0.48);
+  --phi-backdrop-blur: blur(24px) saturate(180%);
+}
+
+:root[data-theme='dark'][data-theme-style='glass'],
+:root.dark[data-theme-style='glass'] {
+  --phi-gradient-card: linear-gradient(180deg, rgba(30, 41, 59, 0.62) 0%, rgba(15, 23, 42, 0.46) 100%);
+  --phi-glass-surface: rgba(15, 23, 42, 0.62);
+  --phi-glass-border: rgba(255, 255, 255, 0.14);
+}
+
+:root[data-theme-style='elevated'] {
+  --phi-shadow-2: 0 10px 24px rgba(15, 23, 42, 0.12), 0 2px 8px rgba(15, 23, 42, 0.08);
+  --phi-shadow-3: 0 18px 40px rgba(15, 23, 42, 0.16), 0 6px 16px rgba(15, 23, 42, 0.10);
+  --phi-shadow-4: 0 28px 64px rgba(15, 23, 42, 0.22), 0 10px 24px rgba(15, 23, 42, 0.12);
+}
+
+:root[data-theme-style='gradient'] {
+  --phi-radius-md: 10px;
+  --phi-radius-lg: 14px;
+  --phi-radius-xl: 18px;
+  --phi-gradient-main: linear-gradient(180deg, #ffffff 0%, #f8fafc 48%, #eef2ff 100%);
+  --phi-gradient-card: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  --phi-gradient-navbar: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+:root[data-theme='dark'][data-theme-style='gradient'],
+:root.dark[data-theme-style='gradient'] {
+  --phi-gradient-main: linear-gradient(180deg, #0b0f19 0%, #0f172a 48%, #111827 100%);
+  --phi-gradient-card: linear-gradient(180deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.86) 100%);
+  --phi-gradient-navbar: linear-gradient(180deg, rgba(11, 15, 25, 0.92) 0%, rgba(15, 23, 42, 0.88) 100%);
+}

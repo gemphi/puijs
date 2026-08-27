@@ -28,7 +28,7 @@ type ToastProps = {
 export const Toast = ({ message, variant = TOAST_VARIANTS.INFO, onClose, className = '' }: ToastProps) => {
   return createPortal(
     <Stack direction="row" align="center" justify="between" className={cn(styles.toast, styles[variant], className)} role="status">
-      <Text variant="sm">{message}</Text>
+      <Text size="sm">{message}</Text>
       <Button variant="icon" size="sm" onClick={onClose} aria-label="Close">
         <X size={14} />
       </Button>

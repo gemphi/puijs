@@ -1,8 +1,19 @@
 import React, { useState } from 'react';
-import { Check, Copy, GraduationCap, Info, Terminal, ChevronRight } from 'lucide-react';
+import { Check, Copy, GraduationCap, Terminal } from 'lucide-react';
 import type { DocGuide } from './types';
-import { Table, Thead, Tbody, Tr, Th, Td } from '../../data-display/Table';
-import { Badge } from '../../primitives/Badge';
+import { Container } from '../Container';
+import { Section } from '../Section';
+import { Stack } from '../Stack';
+import { Title } from '../../primitives/Title';
+import { Text } from '../../primitives/Text';
+import { Button } from '../../primitives/Button';
+import { Divider } from '../../primitives/Divider';
+import { Span } from '../../primitives/Span';
+import { Callout } from '../../feedback/Callout';
+import { Card, CardHeader, CardBody } from '../../display/Card';
+import { List, ListItem } from '../../display/List';
+import { Table, Thead, Tbody, Tr, Th, Td } from '../../display/Table';
+import styles from './DocsArticle.module.scss';
 
 interface DocsArticleProps {
   guide: DocGuide;
@@ -27,155 +38,62 @@ export const DocsArticle: React.FC<DocsArticleProps> = ({
   };
 
   return (
-    <main style={{
-      padding: '2.5rem 3.5rem',
-      maxWidth: '980px',
-      width: '100%',
-      margin: '0 auto',
-    }}>
-      {/* Breadcrumb / Category */}
-      <nav style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
-        <span style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-primary, #818cf8)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-          {guide.category}
-        </span>
-        <span style={{ color: 'var(--text-secondary, #94a3b8)' }}>/</span>
-        <span style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-secondary, #94a3b8)' }}>
-          {guide.badge}
-        </span>
-      </nav>
+    <Container size="lg" className={styles.article}>
+      <Stack direction="column" gap={6}>
+        {/* Breadcrumb / Category */}
+        <Stack direction="row" align="center" gap={2} className={styles.breadcrumb}>
+          <Text as="span" size="xs" variant="primary" weight="bold" textTransform="uppercase" letterSpacing="0.05em">
+            {guide.category}
+          </Text>
+          <Text as="span" size="xs" variant="secondary">/</Text>
+          <Text as="span" size="xs" variant="secondary" weight="semibold">{guide.badge}</Text>
+        </Stack>
 
-      {/* Article Title & Summary */}
-      <header style={{ borderBottom: '1px solid var(--border-color, rgba(129, 140, 248, 0.2))', paddingBottom: '1.5rem', marginBottom: '2rem' }}>
-        <section style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', marginBottom: '0.75rem' }}>
-          <h1 style={{
-            fontSize: '2.25rem',
-            fontWeight: 800,
-            color: 'var(--text-primary, #f8fafc)',
-            lineHeight: 1.2,
-            letterSpacing: '-0.025em',
-            margin: 0,
-          }}>
-            {guide.title}
-          </h1>
+        {/* Article Title & Summary */}
+        <Section as="header" className={styles.header}>
+          <Stack direction="row" align="start" justify="between" gap={4} className={styles.titleRow}>
+            <Title variant="h1" size="2xl" className={styles.title}>{guide.title}</Title>
+            <Button variant="outline" size="sm" onClick={handleCopy} icon={copied ? <Check size={15} /> : <Copy size={15} />}>
+              {copied ? 'Copied' : 'Copy Guide'}
+            </Button>
+          </Stack>
+          <Text size="md" variant="secondary" className={styles.summary}>{guide.summary}</Text>
+        </Section>
 
-          <button
-            onClick={handleCopy}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              padding: '0.45rem 0.85rem',
-              borderRadius: 'var(--radius-md, 8px)',
-              background: 'var(--gradient-card, rgba(14, 16, 38, 0.8))',
-              border: '1px solid var(--border-color, rgba(129, 140, 248, 0.2))',
-              color: 'var(--text-primary, #f8fafc)',
-              fontSize: '0.75rem',
-              fontWeight: 600,
-              cursor: 'pointer',
-              flexShrink: 0,
-              transition: 'all 0.15s ease',
-            }}
-          >
-            {copied ? <Check size={15} style={{ color: 'var(--color-success, #34d399)' }} /> : <Copy size={15} />}
-            <span>{copied ? 'Copied' : 'Copy Guide'}</span>
-          </button>
-        </section>
+        {/* Academic References Callout */}
+        {guide.citations && guide.citations.length > 0 && (
+          <Callout intent="primary" title="Foundational Literature & Academic References:" icon={<GraduationCap size={18} />}>
+            <List className={styles.citationList}>
+              {guide.citations.map((cit, idx) => (
+                <ListItem key={idx}>{cit}</ListItem>
+              ))}
+            </List>
+          </Callout>
+        )}
 
-        <p style={{ fontSize: '1.05rem', color: 'var(--text-secondary, #94a3b8)', lineHeight: 1.6, margin: 0 }}>
-          {guide.summary}
-        </p>
-      </header>
+        {/* Rendered Guide Body */}
+        <Section as="article" className={styles.body}>
+          <RichMarkdownContent content={guide.content} />
+        </Section>
 
-      {/* Academic References Callout */}
-      {guide.citations && guide.citations.length > 0 && (
-        <aside style={{
-          background: 'linear-gradient(180deg, rgba(14, 16, 38, 0.85) 0%, transparent 100%)',
-          border: '1px solid var(--border-color, rgba(129, 140, 248, 0.2))',
-          borderRadius: '14px',
-          overflow: 'hidden',
-          padding: '1.25rem 1.5rem',
-          marginBottom: '2rem',
-          boxShadow: '0 4px 16px rgba(0, 0, 0, 0.25)',
-        }}>
-          <p style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            color: 'var(--color-primary, #818cf8)',
-            fontWeight: 700,
-            fontSize: '0.875rem',
-            margin: '0 0 0.4rem 0',
-          }}>
-            <GraduationCap size={18} /> Foundational Literature & Academic References:
-          </p>
-          <ul style={{ margin: 0, paddingLeft: '1.25rem', color: 'var(--text-primary, #f8fafc)', fontSize: '0.85rem', lineHeight: '1.6' }}>
-            {guide.citations.map((cit, idx) => (
-              <li key={idx}>{cit}</li>
-            ))}
-          </ul>
-        </aside>
-      )}
+        {/* Bottom Guide Pagination */}
+        <Section as="footer" className={styles.pagination}>
+          {prevGuide ? (
+            <Button variant="outline" size="sm" onClick={() => onSelectGuide(prevGuide.id)} className={styles.prevNext}>
+              <Text as="span" size="xs" variant="secondary" weight="semibold">← PREVIOUS</Text>
+              <Text as="span" size="sm" variant="primary" weight="bold" className={styles.ellipsis}>{prevGuide.title}</Text>
+            </Button>
+          ) : <Span aria-hidden="true" />}
 
-      {/* Rendered Guide Body */}
-      <article style={{ lineHeight: '1.8', fontSize: '0.975rem' }}>
-        <RichMarkdownContent content={guide.content} />
-      </article>
-
-      {/* Bottom Guide Pagination */}
-      <footer style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        borderTop: '1px solid var(--border-color, rgba(129, 140, 248, 0.2))',
-        paddingTop: '2rem',
-        marginTop: '3rem',
-      }}>
-        {prevGuide ? (
-          <button
-            onClick={() => onSelectGuide(prevGuide.id)}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              gap: '0.25rem',
-              background: 'linear-gradient(180deg, rgba(14, 16, 38, 0.85) 0%, transparent 100%)',
-              border: '1px solid var(--border-color, rgba(129, 140, 248, 0.2))',
-              borderRadius: '12px',
-              overflow: 'hidden',
-              padding: '0.75rem 1.25rem',
-              cursor: 'pointer',
-              textAlign: 'left',
-              maxWidth: '45%',
-            }}
-          >
-            <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary, #94a3b8)', fontWeight: 600 }}>← PREVIOUS</span>
-            <span style={{ fontSize: '0.875rem', color: 'var(--color-primary, #818cf8)', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '100%' }}>{prevGuide.title}</span>
-          </button>
-        ) : <span />}
-
-        {nextGuide ? (
-          <button
-            onClick={() => onSelectGuide(nextGuide.id)}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'flex-end',
-              gap: '0.25rem',
-              background: 'linear-gradient(180deg, rgba(14, 16, 38, 0.85) 0%, transparent 100%)',
-              border: '1px solid var(--border-color, rgba(129, 140, 248, 0.2))',
-              borderRadius: '12px',
-              overflow: 'hidden',
-              padding: '0.75rem 1.25rem',
-              cursor: 'pointer',
-              textAlign: 'right',
-              maxWidth: '45%',
-            }}
-          >
-            <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary, #94a3b8)', fontWeight: 600 }}>NEXT →</span>
-            <span style={{ fontSize: '0.875rem', color: 'var(--color-primary, #818cf8)', fontWeight: 700, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', width: '100%' }}>{nextGuide.title}</span>
-          </button>
-        ) : <span />}
-      </footer>
-    </main>
+          {nextGuide ? (
+            <Button variant="outline" size="sm" onClick={() => onSelectGuide(nextGuide.id)} className={styles.prevNext}>
+              <Text as="span" size="xs" variant="secondary" weight="semibold">NEXT →</Text>
+              <Text as="span" size="sm" variant="primary" weight="bold" className={styles.ellipsis}>{nextGuide.title}</Text>
+            </Button>
+          ) : <Span aria-hidden="true" />}
+        </Section>
+      </Stack>
+    </Container>
   );
 };
 
@@ -186,241 +104,106 @@ function RichMarkdownContent({ content }: { content: string }) {
   const sections = parseMarkdownBlocks(content);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1.35rem' }}>
+    <Stack direction="column" gap={5}>
       {sections.map((sec, idx) => {
         switch (sec.type) {
           case 'code':
             return (
-              <figure
-                key={idx}
-                style={{
-                  background: 'linear-gradient(180deg, rgba(14, 16, 38, 0.85) 0%, transparent 100%)',
-                  border: '1px solid var(--border-color, rgba(129, 140, 248, 0.2))',
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.25)',
-                  margin: '0.5rem 0',
-                }}
-              >
-                <figcaption style={{
-                  background: 'linear-gradient(180deg, rgba(99, 102, 241, 0.15) 0%, transparent 100%)',
-                  borderBottom: '1px solid var(--border-color, rgba(129, 140, 248, 0.2))',
-                  padding: '0.45rem 1rem',
-                  fontSize: '0.72rem',
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  color: 'var(--text-secondary, #94a3b8)',
-                  letterSpacing: '0.05em',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.4rem',
-                }}>
-                  <Terminal size={13} />
-                  <span>{sec.lang || 'text'}</span>
-                </figcaption>
-                <pre style={{
-                  padding: '1.1rem',
-                  margin: 0,
-                  overflowX: 'auto',
-                  fontFamily: 'Fira Code, Consolas, Monaco, monospace',
-                  fontSize: '0.85rem',
-                  color: 'var(--text-primary, #f8fafc)',
-                  lineHeight: '1.6',
-                }}>
-                  <code>{sec.content}</code>
-                </pre>
-              </figure>
+              <Card key={idx} variant="flat" className={styles.codeBlock}>
+                <CardHeader className={styles.codeHeader}>
+                  <Stack direction="row" align="center" gap={2}>
+                    <Terminal size={13} />
+                    <Text as="span" size="xs" variant="secondary" textTransform="uppercase" letterSpacing="0.05em">
+                      {sec.lang || 'text'}
+                    </Text>
+                  </Stack>
+                </CardHeader>
+                <CardBody>
+                  <pre className={styles.pre}><code>{sec.content}</code></pre>
+                </CardBody>
+              </Card>
             );
 
           case 'table':
             return (
-              <div
-                key={idx}
-                style={{
-                  overflowX: 'auto',
-                  margin: '0.75rem 0',
-                  border: '1px solid var(--border-color, rgba(129, 140, 248, 0.25))',
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  background: 'linear-gradient(180deg, rgba(14, 16, 38, 0.85) 0%, transparent 100%)',
-                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.25)',
-                }}
-              >
-                <table style={{
-                  width: '100%',
-                  borderCollapse: 'collapse',
-                  fontSize: '0.875rem',
-                  textAlign: 'left',
-                }}>
-                  <thead>
-                    <tr style={{
-                      background: 'linear-gradient(180deg, rgba(99, 102, 241, 0.18) 0%, transparent 100%)',
-                      borderBottom: '1px solid var(--border-color, rgba(129, 140, 248, 0.2))',
-                    }}>
+              <Card key={idx} variant="flat" className={styles.tableCard}>
+                <Table>
+                  <Thead>
+                    <Tr>
                       {sec.headers.map((h, i) => (
-                        <th
-                          key={i}
-                          style={{
-                            padding: '0.75rem 1rem',
-                            fontWeight: 700,
-                            color: 'var(--text-primary, #f8fafc)',
-                            letterSpacing: '0.02em',
-                          }}
-                        >
+                        <Th key={i}>
                           <InlineFormattedText text={h} />
-                        </th>
+                        </Th>
                       ))}
-                    </tr>
-                  </thead>
-                  <tbody>
+                    </Tr>
+                  </Thead>
+                  <Tbody>
                     {sec.rows.map((row, rIdx) => (
-                      <tr
-                        key={rIdx}
-                        style={{
-                          borderBottom: rIdx < sec.rows.length - 1 ? '1px solid var(--border-color, rgba(129, 140, 248, 0.15))' : 'none',
-                          background: rIdx % 2 === 1 ? 'rgba(255, 255, 255, 0.02)' : 'transparent',
-                        }}
-                      >
+                      <Tr key={rIdx}>
                         {row.map((cell, cIdx) => (
-                          <td
-                            key={cIdx}
-                            style={{
-                              padding: '0.75rem 1rem',
-                              color: cIdx === 0 ? 'var(--color-primary, #818cf8)' : 'var(--text-primary, #f8fafc)',
-                              fontWeight: cIdx === 0 ? 600 : 400,
-                              fontFamily: cIdx === 0 && cell.startsWith('`') ? 'monospace' : 'inherit',
-                            }}
-                          >
+                          <Td key={cIdx}>
                             <InlineFormattedText text={cell} />
-                          </td>
+                          </Td>
                         ))}
-                      </tr>
+                      </Tr>
                     ))}
-                  </tbody>
-                </table>
-              </div>
+                  </Tbody>
+                </Table>
+              </Card>
             );
 
           case 'h2':
             return (
-              <h2
-                key={idx}
-                style={{
-                  fontSize: '1.65rem',
-                  fontWeight: 800,
-                  color: 'var(--text-primary, #f8fafc)',
-                  marginTop: '1.5rem',
-                  marginBottom: '0.4rem',
-                  letterSpacing: '-0.02em',
-                  borderBottom: '1px solid var(--border-color, rgba(129, 140, 248, 0.15))',
-                  paddingBottom: '0.4rem',
-                }}
-              >
+              <Title key={idx} variant="h2" size="xl" className={styles.h2}>
                 <InlineFormattedText text={sec.content} />
-              </h2>
+              </Title>
             );
 
           case 'h3':
             return (
-              <h3
-                key={idx}
-                style={{
-                  fontSize: '1.35rem',
-                  fontWeight: 700,
-                  color: 'var(--text-primary, #f8fafc)',
-                  marginTop: '1.25rem',
-                  marginBottom: '0.35rem',
-                  letterSpacing: '-0.01em',
-                }}
-              >
+              <Title key={idx} variant="h3" size="lg" className={styles.h3}>
                 <InlineFormattedText text={sec.content} />
-              </h3>
+              </Title>
             );
 
           case 'h4':
             return (
-              <h4
-                key={idx}
-                style={{
-                  fontSize: '1.1rem',
-                  fontWeight: 700,
-                  color: 'var(--text-primary, #f8fafc)',
-                  marginTop: '1rem',
-                  marginBottom: '0.25rem',
-                }}
-              >
+              <Title key={idx} variant="h4" size="md" className={styles.h4}>
                 <InlineFormattedText text={sec.content} />
-              </h4>
+              </Title>
             );
 
           case 'blockquote':
             return (
-              <aside
-                key={idx}
-                style={{
-                  borderLeft: '4px solid var(--color-primary, #818cf8)',
-                  background: 'linear-gradient(180deg, rgba(14, 16, 38, 0.85) 0%, transparent 100%)',
-                  padding: '1rem 1.25rem',
-                  borderRadius: '0 12px 12px 0',
-                  overflow: 'hidden',
-                  color: 'var(--text-primary, #f8fafc)',
-                  fontStyle: 'italic',
-                  margin: '0.5rem 0',
-                }}
-              >
+              <Callout key={idx} intent="none" className={styles.blockquote}>
                 <InlineFormattedText text={sec.content} />
-              </aside>
+              </Callout>
             );
 
           case 'list':
             return (
-              <ul
-                key={idx}
-                style={{
-                  margin: '0.5rem 0',
-                  paddingLeft: '1.5rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '0.45rem',
-                }}
-              >
+              <List key={idx} className={styles.list}>
                 {sec.items.map((item, iIdx) => (
-                  <li key={iIdx} style={{ color: 'var(--text-primary, #f8fafc)' }}>
+                  <ListItem key={iIdx}>
                     <InlineFormattedText text={item} />
-                  </li>
+                  </ListItem>
                 ))}
-              </ul>
+              </List>
             );
 
           case 'hr':
-            return (
-              <hr
-                key={idx}
-                style={{
-                  border: 'none',
-                  borderTop: '1px solid var(--border-color, rgba(129, 140, 248, 0.2))',
-                  margin: '1.5rem 0',
-                }}
-              />
-            );
+            return <Divider key={idx} className={styles.divider} />;
 
           case 'paragraph':
           default:
             return (
-              <p
-                key={idx}
-                style={{
-                  margin: 0,
-                  color: 'var(--text-primary, #f8fafc)',
-                  lineHeight: '1.8',
-                }}
-              >
+              <Text key={idx} size="md" className={styles.paragraph}>
                 <InlineFormattedText text={sec.content} />
-              </p>
+              </Text>
             );
         }
       })}
-    </div>
+    </Stack>
   );
 }
 
@@ -438,42 +221,23 @@ function InlineFormattedText({ text }: { text: string }) {
       {parts.map((part, i) => {
         if (part.startsWith('`') && part.endsWith('`') && part.length > 1) {
           return (
-            <code
-              key={i}
-              style={{
-                background: 'rgba(99, 102, 241, 0.12)',
-                border: '1px solid var(--border-color, rgba(129, 140, 248, 0.2))',
-                padding: '0.15rem 0.45rem',
-                borderRadius: '4px',
-                fontFamily: 'Fira Code, Consolas, Monaco, monospace',
-                fontSize: '0.85em',
-                color: 'var(--color-primary, #818cf8)',
-              }}
-            >
+            <code key={i} className={styles.inlineCode}>
               {part.slice(1, -1)}
             </code>
           );
         }
         if (part.startsWith('**') && part.endsWith('**') && part.length > 3) {
           return (
-            <strong key={i} style={{ fontWeight: 700, color: 'var(--text-primary, #f8fafc)' }}>
+            <Span key={i} variant="bold" className={styles.strong}>
               {part.slice(2, -2)}
-            </strong>
+            </Span>
           );
         }
         if (part.startsWith('$') && part.endsWith('$') && part.length > 1) {
           return (
-            <span
-              key={i}
-              style={{
-                fontFamily: 'KaTeX_Math, Cambria Math, Times New Roman, serif',
-                fontStyle: 'italic',
-                color: 'var(--color-primary, #818cf8)',
-                padding: '0 0.2rem',
-              }}
-            >
+            <Span key={i} className={styles.math}>
               {part.slice(1, -1)}
-            </span>
+            </Span>
           );
         }
         return <React.Fragment key={i}>{part}</React.Fragment>;

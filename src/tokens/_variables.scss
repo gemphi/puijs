@@ -53,8 +53,14 @@
   --phi-shadow-2: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
   --phi-shadow-3: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
   --phi-shadow-4: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  --phi-shadow-sm: var(--phi-shadow-1);
+  --phi-shadow-md: var(--phi-shadow-2);
+  --phi-shadow-lg: var(--phi-shadow-3);
+  --phi-shadow-xl: var(--phi-shadow-4);
 
   /* Top-to-Bottom Surface Gradients */
+  --phi-brand-gradient: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+  --phi-gradient-brand: var(--phi-brand-gradient);
   --phi-gradient-main: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
   --phi-gradient-main-lr: linear-gradient(to right, #ffffff 0%, #f8fafc 100%);
   --phi-gradient-card: linear-gradient(180deg, #ffffff 0%, #fafbff 100%);
@@ -62,6 +68,9 @@
   --phi-gradient-sidebar: linear-gradient(to right, #f8fafc 0%, #ffffff 100%);
   --phi-gradient-accent: linear-gradient(to right, #eff6ff 0%, #e0e7ff 100%);
   --phi-gradient-table-header: linear-gradient(180deg, #f1f5f9 0%, #e2e8f0 100%);
+  --phi-glass-surface: rgba(255, 255, 255, 0.72);
+  --phi-glass-border: rgba(255, 255, 255, 0.48);
+  --phi-backdrop-blur: blur(16px) saturate(180%);
 
   /* Unified Rounding Tokens */
   --phi-radius-none: 0px;
@@ -151,6 +160,13 @@
   --phi-color-background-secondary: #0f172a;
   --phi-color-background-card: #0f172a;
 
+  --phi-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --phi-shadow-2: 0 4px 10px rgba(0, 0, 0, 0.45);
+  --phi-shadow-3: 0 12px 28px rgba(0, 0, 0, 0.5);
+  --phi-shadow-4: 0 24px 48px rgba(0, 0, 0, 0.58);
+
+  --phi-brand-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  --phi-gradient-brand: var(--phi-brand-gradient);
   --phi-gradient-main: linear-gradient(180deg, #0b0f19 0%, #0f172a 100%);
   --phi-gradient-main-lr: linear-gradient(to right, #0b0f19 0%, #0f172a 100%);
   --phi-gradient-card: linear-gradient(180deg, rgba(30, 41, 59, 0.6) 0%, rgba(15, 23, 42, 0.8) 100%);
@@ -158,6 +174,9 @@
   --phi-gradient-sidebar: linear-gradient(to right, rgba(11, 15, 25, 0.95) 0%, rgba(15, 23, 42, 0.9) 100%);
   --phi-gradient-accent: linear-gradient(to right, rgba(2, 132, 199, 0.15) 0%, rgba(56, 189, 248, 0.08) 100%);
   --phi-gradient-table-header: linear-gradient(180deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+  --phi-glass-surface: rgba(15, 23, 42, 0.62);
+  --phi-glass-border: rgba(255, 255, 255, 0.14);
+  --phi-backdrop-blur: blur(16px) saturate(180%);
 
   --phi-color-text-primary: #f8fafc;
   --phi-color-text-secondary: #cbd5e1;

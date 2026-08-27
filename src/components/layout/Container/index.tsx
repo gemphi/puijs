@@ -1,6 +1,7 @@
 import React from 'react';
 import { cn } from '../../../utils/cn';
 import { StyleProps, stylePropsToCSS } from '../../shared/styleProps';
+import { responsiveCSSVars, type ResponsiveValue } from '../../shared/responsive';
 import styles from './styles.module.scss';
 
 export const CONTAINER_SIZES = {
@@ -15,7 +16,7 @@ export const CONTAINER_SIZES = {
 export type ContainerSize = (typeof CONTAINER_SIZES)[keyof typeof CONTAINER_SIZES];
 
 type ContainerProps = React.HTMLAttributes<HTMLDivElement> & {
-  size?: ContainerSize;
+  size?: ResponsiveValue<ContainerSize>;
   fluid?: boolean;
   className?: string;
   children?: React.ReactNode;
@@ -23,9 +24,20 @@ type ContainerProps = React.HTMLAttributes<HTMLDivElement> & {
 
 export const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
   ({ size, fluid = false, className = '', style, children, ...props }, ref) => {
-    const sizeClass = fluid || !size ? styles.full : styles[size];
+    const sizeClass = fluid || !size ? styles.full : typeof size === 'object' ? '' : styles[size];
     const stylePropsCSS = stylePropsToCSS(props);
-    const computedStyle = { ...stylePropsCSS, ...style };
+    const computedStyle = {
+      ...responsiveCSSVars('container-max-width', fluid ? 'full' : size, (value: ContainerSize) => ({
+        xs: '576px',
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        full: 'none',
+      })[value]),
+      ...stylePropsCSS,
+      ...style,
+    };
 
     const { background, padding, paddingTop, paddingBottom, paddingLeft, paddingRight, paddingX, paddingY, margin, marginTop, marginBottom, color, maxWidth, minWidth, minHeight, align, textDecoration, opacity, textTransform, letterSpacing, ...rest } = props;
 

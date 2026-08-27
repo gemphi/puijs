@@ -1,0 +1,47 @@
+.portal {
+  min-height: 100vh;
+}
+
+.header,
+.footer {
+  min-width: 0;
+}
+
+.main {
+  min-width: 0;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  width: 100%;
+  min-height: calc(100vh - 65px);
+}
+
+.sidebar,
+.content,
+.aside {
+  min-width: 0;
+}
+
+.portal[data-portal-variant='landing'] .contentGrid,
+.portal[data-portal-variant='app'] .contentGrid {
+  display: block;
+}
+
+.portal[data-portal-variant='blog'] .contentGrid {
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+}
+
+@media (max-width: 1024px) {
+  .contentGrid,
+  .portal[data-portal-variant='blog'] .contentGrid {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar,
+  .aside {
+    width: 100%;
+  }
+}

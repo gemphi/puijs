@@ -4,6 +4,31 @@
   margin-right: auto;
   padding-left: 1rem;
   padding-right: 1rem;
+  max-width: var(--container-max-width, none);
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: var(--container-max-width-sm, var(--container-max-width, none));
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: var(--container-max-width-md, var(--container-max-width-sm, var(--container-max-width, none)));
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: var(--container-max-width-lg, var(--container-max-width-md, var(--container-max-width-sm, var(--container-max-width, none))));
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: var(--container-max-width-xl, var(--container-max-width-lg, var(--container-max-width-md, var(--container-max-width-sm, var(--container-max-width, none)))));
+  }
 }
 
 .xs {

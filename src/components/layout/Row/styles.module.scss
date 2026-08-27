@@ -1,6 +1,46 @@
 .row {
   display: flex;
   flex-direction: row;
+  gap: var(--row-gap, 0.5rem);
+  align-items: var(--row-align, center);
+  justify-content: var(--row-justify, flex-start);
+  flex-wrap: var(--row-wrap, wrap);
+}
+
+@media (min-width: 576px) {
+  .row {
+    gap: var(--row-gap-sm, var(--row-gap, 0.5rem));
+    align-items: var(--row-align-sm, var(--row-align, center));
+    justify-content: var(--row-justify-sm, var(--row-justify, flex-start));
+    flex-wrap: var(--row-wrap-sm, var(--row-wrap, wrap));
+  }
+}
+
+@media (min-width: 768px) {
+  .row {
+    gap: var(--row-gap-md, var(--row-gap-sm, var(--row-gap, 0.5rem)));
+    align-items: var(--row-align-md, var(--row-align-sm, var(--row-align, center)));
+    justify-content: var(--row-justify-md, var(--row-justify-sm, var(--row-justify, flex-start)));
+    flex-wrap: var(--row-wrap-md, var(--row-wrap-sm, var(--row-wrap, wrap)));
+  }
+}
+
+@media (min-width: 992px) {
+  .row {
+    gap: var(--row-gap-lg, var(--row-gap-md, var(--row-gap-sm, var(--row-gap, 0.5rem))));
+    align-items: var(--row-align-lg, var(--row-align-md, var(--row-align-sm, var(--row-align, center))));
+    justify-content: var(--row-justify-lg, var(--row-justify-md, var(--row-justify-sm, var(--row-justify, flex-start))));
+    flex-wrap: var(--row-wrap-lg, var(--row-wrap-md, var(--row-wrap-sm, var(--row-wrap, wrap))));
+  }
+}
+
+@media (min-width: 1200px) {
+  .row {
+    gap: var(--row-gap-xl, var(--row-gap-lg, var(--row-gap-md, var(--row-gap-sm, var(--row-gap, 0.5rem)))));
+    align-items: var(--row-align-xl, var(--row-align-lg, var(--row-align-md, var(--row-align-sm, var(--row-align, center)))));
+    justify-content: var(--row-justify-xl, var(--row-justify-lg, var(--row-justify-md, var(--row-justify-sm, var(--row-justify, flex-start)))));
+    flex-wrap: var(--row-wrap-xl, var(--row-wrap-lg, var(--row-wrap-md, var(--row-wrap-sm, var(--row-wrap, wrap)))));
+  }
 }
 
 /* xs row-cols (no infix) - use CSS grid so gaps don't cause wrapping */

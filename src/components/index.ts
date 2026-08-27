@@ -4,7 +4,7 @@ export * from './forms';
 export * from './overlays';
 export * from './feedback';
 export * from './navigation';
-export * from './data-display';
+export * from './display';
 export * from './commerce';
 export * from '../store';
 export * from '../services';

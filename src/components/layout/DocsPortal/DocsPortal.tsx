@@ -1,87 +1,97 @@
-import React, { useState, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { cn } from '../../../utils/cn';
+import { Portal } from '../Portal/Portal';
 import type { DocsPortalProps, DocGuide } from './types';
+import { DocsArticle } from './DocsArticle';
 import { DocsNavbar } from './DocsNavbar';
 import { DocsSidebar } from './DocsSidebar';
-import { DocsArticle } from './DocsArticle';
 import { DocsTOC } from './DocsTOC';
+import styles from './DocsPortal.module.scss';
 
 export const DocsPortal: React.FC<DocsPortalProps> = ({
   guides,
   initialGuideId = 'quickstart',
-  version = 'v0.2.2',
-  brandTitle = 'Phiano Docs',
+  activeGuideId: controlledGuideId,
+  onGuideChange,
+  version,
+  brandTitle = 'Docs',
   onBackToApp,
-  backToAppLabel = 'Open Cockpit',
+  backToAppLabel = 'Open App',
   dark,
   onToggleDark,
   className = '',
 }) => {
-  const [activeGuideId, setActiveGuideId] = useState<string>(initialGuideId);
+  const [internalGuideId, setInternalGuideId] = useState<string>(initialGuideId);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const activeGuideId = controlledGuideId ?? internalGuideId;
 
-  const categories = useMemo(() => {
-    const cats: Record<string, DocGuide[]> = {};
-    guides.forEach((d) => {
-      if (!cats[d.category]) cats[d.category] = [];
-      cats[d.category].push(d);
-    });
-    return cats;
+  useEffect(() => {
+    if (controlledGuideId === undefined) setInternalGuideId(initialGuideId);
+  }, [controlledGuideId, initialGuideId]);
+
+  const selectGuide = (id: string) => {
+    if (controlledGuideId === undefined) setInternalGuideId(id);
+    onGuideChange?.(id);
+  };
+
+  const visibleGuides = useMemo(() => {
+    return guides.filter((guide) => !guide.hidden && !guide.draft);
   }, [guides]);
 
+  const filteredGuides = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) return visibleGuides;
+    return visibleGuides.filter((guide) => [guide.title, guide.category, guide.summary, guide.content]
+      .filter(Boolean)
+      .some((value) => value!.toLowerCase().includes(query)));
+  }, [visibleGuides, searchQuery]);
+
+  const categories = useMemo(() => {
+    const grouped: Record<string, DocGuide[]> = {};
+    filteredGuides.forEach((guide) => {
+      grouped[guide.category] = [...(grouped[guide.category] || []), guide];
+    });
+    return grouped;
+  }, [filteredGuides]);
+
   const activeGuide = useMemo(() => {
-    return guides.find((d) => d.id === activeGuideId) || guides[0];
-  }, [guides, activeGuideId]);
+    return visibleGuides.find((guide) => guide.id === activeGuideId) || visibleGuides[0];
+  }, [visibleGuides, activeGuideId]);
 
-  const currentIndex = useMemo(() => {
-    return guides.findIndex((d) => d.id === activeGuideId);
-  }, [guides, activeGuideId]);
+  const currentIndex = visibleGuides.findIndex((guide) => guide.id === activeGuide?.id);
+  const prevGuide = currentIndex > 0 ? visibleGuides[currentIndex - 1] : undefined;
+  const nextGuide = currentIndex >= 0 && currentIndex < visibleGuides.length - 1 ? visibleGuides[currentIndex + 1] : undefined;
 
-  const prevGuide = currentIndex > 0 ? guides[currentIndex - 1] : undefined;
-  const nextGuide = currentIndex < guides.length - 1 ? guides[currentIndex + 1] : undefined;
+  if (!activeGuide) return null;
 
   return (
-    <article className={`pui-docs-portal ${className}`} style={{
-      display: 'flex',
-      flexDirection: 'column',
-      minHeight: '100vh',
-      background: 'var(--gradient-bg, linear-gradient(180deg, var(--bg-primary, #030307) 0%, var(--bg-secondary, #070814) 100%))',
-      color: 'var(--text-primary, #f8fafc)',
-      fontFamily: 'var(--font-body, system-ui, sans-serif)',
-    }}>
-      <DocsNavbar
-        brandTitle={brandTitle}
-        version={version}
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        onSelectGuide={setActiveGuideId}
-        onBackToApp={onBackToApp}
-        backToAppLabel={backToAppLabel}
-        dark={dark}
-        onToggleDark={onToggleDark}
+    <Portal
+      variant="docs"
+      className={cn(styles.portal, className)}
+      contentClassName={styles.contentGrid}
+      header={(
+        <DocsNavbar
+          brandTitle={brandTitle}
+          version={version}
+          searchQuery={searchQuery}
+          onSearchChange={setSearchQuery}
+          onHome={() => selectGuide(visibleGuides[0]?.id || initialGuideId)}
+          onBackToApp={onBackToApp}
+          backToAppLabel={backToAppLabel}
+          dark={dark}
+          onToggleDark={onToggleDark}
+        />
+      )}
+      sidebar={<DocsSidebar categories={categories} activeGuideId={activeGuide.id} onSelectGuide={selectGuide} />}
+      aside={<DocsTOC />}
+    >
+      <DocsArticle
+        guide={activeGuide}
+        prevGuide={prevGuide}
+        nextGuide={nextGuide}
+        onSelectGuide={selectGuide}
       />
-
-      <section style={{
-        display: 'grid',
-        gridTemplateColumns: '280px minmax(0, 1fr) 260px',
-        flex: 1,
-        width: '100%',
-      }}>
-        <DocsSidebar
-          categories={categories}
-          activeGuideId={activeGuide.id}
-          onSelectGuide={setActiveGuideId}
-        />
-
-        <DocsArticle
-          guide={activeGuide}
-          prevGuide={prevGuide}
-          nextGuide={nextGuide}
-          onSelectGuide={setActiveGuideId}
-        />
-
-        <DocsTOC />
-      </section>
-    </article>
+    </Portal>
   );
 };
 

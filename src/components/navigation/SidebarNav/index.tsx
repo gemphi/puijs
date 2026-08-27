@@ -3,8 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { type LucideIcon } from 'lucide-react';
 import { cn } from '../../../utils/cn';
-import { Accordion, AccordionItem } from '../../data-display/Accordion';
-import { Menu, MenuItem } from '../Menu';
+import { Accordion, AccordionItem } from '../../display/Accordion';
+import { MenuItem } from '../Menu';
+import { Stack } from '../../layout/Stack';
 import { Button } from '../../primitives/Button';
 import { Icon } from '../../primitives/Icon';
 import styles from './styles.module.scss';
@@ -66,15 +67,15 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
 
   return (
     <nav className={cn(styles.sidebarNav, className)}>
-      <Accordion allowMultiple>
+      <Accordion>
         {groups.map((group) => (
           <AccordionItem
             key={group.label}
             title={<span className={styles.groupHeader}><Icon icon={group.icon} size="sm" />{group.label}</span>}
-            isOpen={openGroups[group.label]}
+            open={openGroups[group.label]}
             onToggle={() => setOpenGroups((p) => ({ ...p, [group.label]: !p[group.label] }))}
           >
-            <Menu className={styles.groupMenu}>
+            <Stack direction="column" gap={1} className={styles.groupMenu}>
               {group.items.map((item) => {
                 const active = isPathActive(activePath, item.path);
                 return renderLink ? (
@@ -85,7 +86,7 @@ export const SidebarNav: React.FC<SidebarNavProps> = ({
                   </MenuItem>
                 );
               })}
-            </Menu>
+            </Stack>
           </AccordionItem>
         ))}
       </Accordion>

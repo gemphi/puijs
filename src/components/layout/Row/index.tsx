@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '../../../utils/cn';
 import styles from './styles.module.scss';
-import type { Breakpoint } from '../Col';
+import { responsiveCSSVars, type Breakpoint, type ResponsiveValue } from '../../shared/responsive';
 
 export type RowGap = 1 | 2 | 3 | 4 | 6 | 8;
 export type RowAlign = 'start' | 'center' | 'end' | 'stretch' | 'baseline';
@@ -9,11 +9,11 @@ export type RowJustify = 'start' | 'center' | 'end' | 'between' | 'around' | 'ev
 
 export type RowColumns = number | { cols?: number };
 
-type RowProps = React.HTMLAttributes<HTMLDivElement> & {
-  gap?: RowGap;
-  align?: RowAlign;
-  justify?: RowJustify;
-  wrap?: boolean;
+type RowProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'align'> & {
+  gap?: ResponsiveValue<RowGap>;
+  align?: ResponsiveValue<RowAlign>;
+  justify?: ResponsiveValue<RowJustify>;
+  wrap?: ResponsiveValue<boolean>;
   className?: string;
   children?: React.ReactNode;
   xs?: RowColumns;
@@ -23,7 +23,7 @@ type RowProps = React.HTMLAttributes<HTMLDivElement> & {
   xl?: RowColumns;
 };
 
-const alignMap: Record<RowAlign, React.CSSProperties['alignItems']> = {
+const alignMap: Record<RowAlign, string> = {
   start: 'flex-start',
   center: 'center',
   end: 'flex-end',
@@ -31,7 +31,7 @@ const alignMap: Record<RowAlign, React.CSSProperties['alignItems']> = {
   baseline: 'baseline',
 };
 
-const justifyMap: Record<RowJustify, React.CSSProperties['justifyContent']> = {
+const justifyMap: Record<RowJustify, string> = {
   start: 'flex-start',
   center: 'center',
   end: 'flex-end',
@@ -57,22 +57,25 @@ const buildResponsiveClasses = (bp: Breakpoint, spec: RowColumns | undefined): s
 
 export const Row = React.forwardRef<HTMLDivElement, RowProps>(
   (
-    { gap = 2, align = 'center', justify = 'start', wrap = true, className = '', style, children, xs, sm, md, lg, xl, ...props },
+    { gap, align, justify, wrap, className = '', style, children, xs, sm, md, lg, xl, ...props },
     ref
   ) => {
     const responsiveClasses = BREAKPOINTS.map((bp) => buildResponsiveClasses(bp, { xs, sm, md, lg, xl }[bp])).filter(Boolean) as string[];
+    const resolvedGap: ResponsiveValue<RowGap> = gap ?? 2;
+    const resolvedAlign: ResponsiveValue<RowAlign> = align ?? 'center';
+    const resolvedJustify: ResponsiveValue<RowJustify> = justify ?? 'start';
+    const resolvedWrap: ResponsiveValue<boolean> = wrap ?? true;
 
     return (
       <div
         ref={ref}
         className={cn(styles.row, ...responsiveClasses, className)}
         style={{
+          ...responsiveCSSVars('row-gap', resolvedGap, (value: RowGap) => `${value * 0.25}rem`),
+          ...responsiveCSSVars('row-align', resolvedAlign, (value: RowAlign) => alignMap[value]),
+          ...responsiveCSSVars('row-justify', resolvedJustify, (value: RowJustify) => justifyMap[value]),
+          ...responsiveCSSVars('row-wrap', resolvedWrap, (value: boolean) => (value ? 'wrap' : 'nowrap')),
           ...style,
-          gap: `${gap * 0.25}rem`,
-          '--row-gap': `${gap * 0.25}rem`,
-          alignItems: alignMap[align],
-          justifyContent: justifyMap[justify],
-          flexWrap: wrap ? 'wrap' : 'nowrap',
         } as React.CSSProperties}
         {...props}
       >

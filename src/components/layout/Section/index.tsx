@@ -3,9 +3,9 @@ import { cn } from '../../../utils/cn';
 import { StyleProps, stylePropsToCSS } from '../../shared/styleProps';
 import styles from './styles.module.scss';
 
-export type SectionTag = 'header' | 'main' | 'footer' | 'section' | 'nav' | 'aside' | 'div';
+export type SectionTag = 'header' | 'main' | 'footer' | 'section' | 'article' | 'nav' | 'aside' | 'div';
 
-type SectionProps = React.HTMLAttributes<HTMLElement> & {
+type SectionProps = Omit<React.HTMLAttributes<HTMLElement>, 'align'> & {
   as?: SectionTag;
   className?: string;
   children?: React.ReactNode;
@@ -21,7 +21,7 @@ export const Section = ({
   const stylePropsCSS = stylePropsToCSS(props);
   const computedStyle = { ...stylePropsCSS, ...style };
 
-  const { as: _as, background, padding, paddingTop, paddingBottom, paddingLeft, paddingRight, paddingX, paddingY, margin, marginTop, marginBottom, color, maxWidth, minWidth, minHeight, align, textDecoration, opacity, textTransform, letterSpacing, ...rest } = props;
+  const { background, padding, paddingTop, paddingBottom, paddingLeft, paddingRight, paddingX, paddingY, margin, marginTop, marginBottom, color, maxWidth, minWidth, minHeight, align, textDecoration, opacity, textTransform, letterSpacing, ...rest } = props;
 
   return (
     <Tag className={cn(styles.section, className)} style={computedStyle} {...rest}>

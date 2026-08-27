@@ -1,11 +1,12 @@
 import React from 'react';
 import { cn } from '../../../utils/cn';
+import { responsiveCSSVars, type ResponsiveValue } from '../../shared/responsive';
 import styles from './styles.module.scss';
 
 type StickyProps = {
   children: React.ReactNode;
-  top?: number;
-  bottom?: number;
+  top?: ResponsiveValue<number>;
+  bottom?: ResponsiveValue<number>;
   offset?: number;
   zIndex?: number;
   className?: string;
@@ -21,14 +22,9 @@ export const Sticky = ({
 }: StickyProps) => {
   const style: React.CSSProperties = {
     zIndex,
+    ...responsiveCSSVars('sticky-top', top, (value: number) => `${value + offset}px`),
+    ...responsiveCSSVars('sticky-bottom', bottom, (value: number) => `${value + offset}px`),
   };
-
-  if (top !== undefined) {
-    style.top = `${top + offset}px`;
-  }
-  if (bottom !== undefined) {
-    style.bottom = `${bottom + offset}px`;
-  }
 
   return (
     <div className={cn(styles.sticky, className)} style={style}>

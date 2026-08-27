@@ -33,7 +33,7 @@ export const Alert = ({
 }: AlertProps) => {
   return (
     <Stack direction="row" align="center" justify="between" className={cn(styles.alert, styles[variant], className)} role="alert" {...props}>
-      <Text variant="sm">{children}</Text>
+      <Text size="sm">{children}</Text>
       {dismissible && onDismiss && (
         <Button variant="icon" size="sm" onClick={onDismiss} aria-label="Close">
           <X size={14} />

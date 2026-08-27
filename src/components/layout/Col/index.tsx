@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn } from '../../../utils/cn';
+import { responsiveCSSVars, type Breakpoint, type ResponsiveValue } from '../../shared/responsive';
 import styles from './styles.module.scss';
 
 export type ColGap = 1 | 2 | 3 | 4 | 6 | 8;
@@ -7,13 +8,12 @@ export type ColAlign = 'start' | 'center' | 'end' | 'stretch';
 export type ColJustify = 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
 export type ColSize = boolean | 'auto' | number;
 export type ColSpec = ColSize | { span?: ColSize; offset?: number; order?: number | 'first' | 'last' };
-export type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export type ColProps = React.HTMLAttributes<HTMLDivElement> & {
+export type ColProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'align'> & {
   span?: ColSize;
-  gap?: ColGap;
-  align?: ColAlign;
-  justify?: ColJustify;
+  gap?: ResponsiveValue<ColGap>;
+  align?: ResponsiveValue<ColAlign>;
+  justify?: ResponsiveValue<ColJustify>;
   fill?: boolean;
   xs?: ColSpec;
   sm?: ColSpec;
@@ -22,11 +22,11 @@ export type ColProps = React.HTMLAttributes<HTMLDivElement> & {
   xl?: ColSpec;
 };
 
-const alignMap: Record<ColAlign, React.CSSProperties['alignItems']> = {
+const alignMap: Record<ColAlign, string> = {
   start: 'flex-start', center: 'center', end: 'flex-end', stretch: 'stretch',
 };
 
-const justifyMap: Record<ColJustify, React.CSSProperties['justifyContent']> = {
+const justifyMap: Record<ColJustify, string> = {
   start: 'flex-start', center: 'center', end: 'flex-end',
   between: 'space-between', around: 'space-around', evenly: 'space-evenly',
 };
@@ -63,14 +63,15 @@ export const Col: React.FC<ColProps> = ({
 
   const hasSpan = bpClasses.some((c) => c && c.includes('col-'));
   const dynamicStyle: React.CSSProperties = {
-    ...(align && { alignItems: alignMap[align] }),
-    ...(justify && { justifyContent: justifyMap[justify] }),
+    ...responsiveCSSVars('col-gap', gap, (value: ColGap) => `${value * 0.25}rem`),
+    ...responsiveCSSVars('col-align', align, (value: ColAlign) => alignMap[value]),
+    ...responsiveCSSVars('col-justify', justify, (value: ColJustify) => justifyMap[value]),
     ...style,
   };
 
   return (
     <div
-      className={cn(styles.col, !hasSpan && styles.colAuto, gap && styles[`gap-${gap}`], fill && styles.fill, ...bpClasses, className)}
+      className={cn(styles.col, !hasSpan && styles.colAuto, fill && styles.fill, ...bpClasses, className)}
       style={dynamicStyle}
       {...props}
     >

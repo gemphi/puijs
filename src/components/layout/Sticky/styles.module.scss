@@ -1,3 +1,33 @@
 .sticky {
   position: sticky;
+  top: var(--sticky-top, auto);
+  bottom: var(--sticky-bottom, auto);
+}
+
+@media (min-width: 576px) {
+  .sticky {
+    top: var(--sticky-top-sm, var(--sticky-top, auto));
+    bottom: var(--sticky-bottom-sm, var(--sticky-bottom, auto));
+  }
+}
+
+@media (min-width: 768px) {
+  .sticky {
+    top: var(--sticky-top-md, var(--sticky-top-sm, var(--sticky-top, auto)));
+    bottom: var(--sticky-bottom-md, var(--sticky-bottom-sm, var(--sticky-bottom, auto)));
+  }
+}
+
+@media (min-width: 992px) {
+  .sticky {
+    top: var(--sticky-top-lg, var(--sticky-top-md, var(--sticky-top-sm, var(--sticky-top, auto))));
+    bottom: var(--sticky-bottom-lg, var(--sticky-bottom-md, var(--sticky-bottom-sm, var(--sticky-bottom, auto))));
+  }
+}
+
+@media (min-width: 1200px) {
+  .sticky {
+    top: var(--sticky-top-xl, var(--sticky-top-lg, var(--sticky-top-md, var(--sticky-top-sm, var(--sticky-top, auto)))));
+    bottom: var(--sticky-bottom-xl, var(--sticky-bottom-lg, var(--sticky-bottom-md, var(--sticky-bottom-sm, var(--sticky-bottom, auto)))));
+  }
 }

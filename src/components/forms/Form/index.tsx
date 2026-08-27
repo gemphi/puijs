@@ -19,7 +19,7 @@ export const Form = ({ title, error, className = '', children, onSubmit, ...prop
     <form onSubmit={onSubmit} className={cn(styles.form, className)} {...props}>
       {title && <Title variant="h3">{title}</Title>}
       {error && (
-        <Text variant="sm" className={styles.error}>
+        <Text size="sm" className={styles.error}>
           {error}
         </Text>
       )}
@@ -44,7 +44,7 @@ export const FormField = ({ label, error, children, className = '' }: FormFieldP
       </label>
       {React.cloneElement(children, { id })}
       {error && (
-        <Text variant="xs" className={styles.fieldErrorText}>
+        <Text size="xs" className={styles.fieldErrorText}>
           {error}
         </Text>
       )}

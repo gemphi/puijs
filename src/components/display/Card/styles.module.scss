@@ -1,7 +1,7 @@
 .card {
   display: flex;
   flex-direction: column;
-  background-color: var(--phi-color-background-card);
+  background: var(--phi-gradient-card, var(--phi-color-background-card));
   border: var(--phi-elevation-border, 1px solid var(--phi-color-border));
   border-radius: var(--phi-radius-lg);
   overflow: hidden;

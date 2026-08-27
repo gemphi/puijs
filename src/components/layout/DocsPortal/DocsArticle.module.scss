@@ -1,0 +1,111 @@
+.article {
+  max-width: 980px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem 3.5rem;
+}
+
+.breadcrumb {
+  margin-bottom: 0.75rem;
+}
+
+.header {
+  border-bottom: 1px solid var(--phi-color-border);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.titleRow {
+  margin-bottom: 0.75rem;
+}
+
+.title {}
+.summary {}
+
+.citationList {
+  margin: 0;
+}
+
+.body {
+  line-height: 1.8;
+  font-size: 0.975rem;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--phi-color-border);
+  padding-top: 2rem;
+  margin-top: 3rem;
+}
+
+.prevNext {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  max-width: 45%;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.codeBlock {}
+.codeHeader {}
+.pre {
+  margin: 0;
+  overflow-x: auto;
+  font-family: Fira Code, Consolas, Monaco, monospace;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.tableCard {}
+
+.h2 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.4rem;
+}
+.h3 {
+  margin-top: 1.25rem;
+  margin-bottom: 0.35rem;
+}
+.h4 {
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.blockquote {
+  font-style: italic;
+}
+
+.list {}
+
+.divider {
+  margin: 1.5rem 0;
+}
+
+.inlineCode {
+  background: var(--phi-color-primary-light);
+  border: 1px solid var(--phi-color-border);
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--phi-radius-xs);
+  font-family: var(--phi-font-mono);
+  font-size: 0.85em;
+  color: var(--phi-color-primary);
+}
+
+.strong {
+  color: var(--phi-color-text-primary);
+}
+
+.math {
+  font-family: KaTeX_Math, Cambria Math, Times New Roman, serif;
+  font-style: italic;
+  color: var(--phi-color-primary);
+  padding: 0 0.2rem;
+}

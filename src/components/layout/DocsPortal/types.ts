@@ -1,18 +1,15 @@
-import React from 'react';
+import type React from 'react';
+import type { PortalItem } from '../Portal/types';
 
-export interface DocGuide {
-  id: string;
-  category: string;
-  title: string;
-  badge: string;
-  summary: string;
-  citations: string[];
-  content: string;
-}
+export type DocGuide = PortalItem & {
+  citations?: string[];
+};
 
 export interface DocsPortalProps {
   guides: DocGuide[];
   initialGuideId?: string;
+  activeGuideId?: string;
+  onGuideChange?: (id: string) => void;
   version?: string;
   brandTitle?: string;
   onBackToApp?: () => void;

@@ -1,8 +1,6 @@
 .page {
-  display: flex;
-  flex-direction: row;
   min-height: 100vh;
-  background-color: var(--phi-color-background);
+  background: var(--phi-gradient-main, var(--phi-color-background));
   color: var(--phi-color-text-primary);
   width: 100%;
 }

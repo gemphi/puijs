@@ -1,0 +1,13 @@
+.header {
+  width: 100%;
+  background: var(--phi-gradient-navbar, var(--phi-color-background-card));
+  border-bottom: 1px solid var(--phi-color-border-subtle);
+  backdrop-filter: var(--phi-backdrop-blur);
+  -webkit-backdrop-filter: var(--phi-backdrop-blur);
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}

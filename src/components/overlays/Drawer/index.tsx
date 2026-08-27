@@ -7,7 +7,7 @@ import { cn } from '../../../utils/cn';
 import { Button } from '../../primitives/Button';
 import { Title } from '../../primitives/Title';
 import { Stack } from '../../layout/Stack';
-import { Card, CardHeader, CardBody, CardFooter } from '../../data-display/Card';
+import { Card, CardHeader, CardBody, CardFooter } from '../../display/Card';
 import styles from './styles.module.scss';
 
 export const DRAWER_POSITIONS = {

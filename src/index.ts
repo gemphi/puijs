@@ -10,7 +10,7 @@ export * from './components/forms';
 export * from './components/overlays';
 export * from './components/feedback';
 export * from './components/navigation';
-export * from './components/data-display';
+export * from './components/display';
 export * from './components/commerce';
 
 // Reactive Store Layer

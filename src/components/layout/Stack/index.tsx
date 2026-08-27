@@ -1,22 +1,24 @@
 import React from 'react';
 import { cn } from '../../../utils/cn';
 import { StyleProps, stylePropsToCSS } from '../../shared/styleProps';
+import { responsiveCSSVars, type ResponsiveValue } from '../../shared/responsive';
 import styles from './styles.module.scss';
 
 export type StackDirection = 'row' | 'column' | 'row-reverse' | 'column-reverse';
 export type StackAlign = 'start' | 'center' | 'end' | 'stretch' | 'baseline';
 export type StackJustify = 'start' | 'center' | 'end' | 'between' | 'around' | 'evenly';
+export type StackGap = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 8;
 
-type StackProps = React.HTMLAttributes<HTMLDivElement> & {
-  direction?: StackDirection;
-  gap?: number;
-  align?: StackAlign;
-  justify?: StackJustify;
-  wrap?: boolean;
+export type StackProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'align'> & {
+  direction?: ResponsiveValue<StackDirection>;
+  gap?: ResponsiveValue<StackGap>;
+  align?: ResponsiveValue<StackAlign>;
+  justify?: ResponsiveValue<StackJustify>;
+  wrap?: ResponsiveValue<boolean>;
   ref?: React.Ref<HTMLDivElement>;
-} & StyleProps;
+} & Omit<StyleProps, 'align'>;
 
-const justifyMap: Record<StackJustify, React.CSSProperties['justifyContent']> = {
+const justifyMap: Record<StackJustify, string> = {
   start: 'flex-start',
   center: 'center',
   end: 'flex-end',
@@ -25,7 +27,7 @@ const justifyMap: Record<StackJustify, React.CSSProperties['justifyContent']> = 
   evenly: 'space-evenly',
 };
 
-const alignMap: Record<StackAlign, React.CSSProperties['alignItems']> = {
+const alignMap: Record<StackAlign, string> = {
   start: 'flex-start',
   center: 'center',
   end: 'flex-end',
@@ -46,16 +48,16 @@ export const Stack = React.forwardRef<HTMLDivElement, StackProps>(({
 }, ref) => {
   const stylePropsCSS = stylePropsToCSS(props);
   const computedStyle: React.CSSProperties = {
-    flexDirection: direction,
-    alignItems: alignMap[align],
-    justifyContent: justifyMap[justify],
-    flexWrap: wrap ? 'wrap' : 'nowrap',
-    gap: `${gap * 0.25}rem`,
+    ...responsiveCSSVars('stack-direction', direction),
+    ...responsiveCSSVars('stack-align', align, (value: StackAlign) => alignMap[value]),
+    ...responsiveCSSVars('stack-justify', justify, (value: StackJustify) => justifyMap[value]),
+    ...responsiveCSSVars('stack-wrap', wrap, (value) => (value ? 'wrap' : 'nowrap')),
+    ...responsiveCSSVars('stack-gap', gap, (value) => `${value * 0.25}rem`),
     ...stylePropsCSS,
     ...style,
   };
 
-  const { background, padding, paddingTop, paddingBottom, paddingLeft, paddingRight, paddingX, paddingY, margin, marginTop, marginBottom, color, maxWidth, minWidth, minHeight, align: _align, textDecoration, opacity, textTransform, letterSpacing, ...rest } = props;
+  const { background, padding, paddingTop, paddingBottom, paddingLeft, paddingRight, paddingX, paddingY, margin, marginTop, marginBottom, color, maxWidth, minWidth, minHeight, textDecoration, opacity, textTransform, letterSpacing, ...rest } = props;
 
   return (
     <div ref={ref} className={cn(styles.stack, className)} style={computedStyle} {...rest}>

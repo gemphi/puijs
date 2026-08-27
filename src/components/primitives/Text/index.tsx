@@ -16,7 +16,7 @@ export type TextSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 export type TextWeight = 'normal' | 'medium' | 'semibold' | 'bold';
 export type TextAlign = 'left' | 'center' | 'right';
 
-export type TextProps = React.HTMLAttributes<HTMLParagraphElement> & {
+export type TextProps = Omit<React.HTMLAttributes<HTMLElement>, 'align'> & {
   intent?: TextIntent;
   variant?: TextIntent;
   size?: TextSize;
@@ -42,22 +42,22 @@ export const Text = ({
   const stylePropsCSS = stylePropsToCSS(props);
   const computedStyle = { ...stylePropsCSS, ...style };
 
-  const { background, padding, paddingTop, paddingBottom, paddingLeft, paddingRight, paddingX, paddingY, margin, marginTop, marginBottom, color, maxWidth, minWidth, minHeight, align: _align, textDecoration, opacity, textTransform, letterSpacing, ...rest } = props;
+  const { background, padding, paddingTop, paddingBottom, paddingLeft, paddingRight, paddingX, paddingY, margin, marginTop, marginBottom, color, maxWidth, minWidth, minHeight, textDecoration, opacity, textTransform, letterSpacing, ...rest } = props;
 
-  return (
-    <Component
-      className={cn(
+  return React.createElement(
+    Component,
+    {
+      className: cn(
         styles.text,
         styles[`intent-${resolvedIntent}`],
         styles[`size-${size}`],
         styles[`weight-${weight}`],
         styles[`align-${align}`],
         className
-      )}
-      style={computedStyle}
-      {...rest}
-    >
-      {children}
-    </Component>
+      ),
+      style: computedStyle,
+      ...rest,
+    },
+    children
   );
 };

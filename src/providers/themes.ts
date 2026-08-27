@@ -11,9 +11,13 @@ const B = (o: Partial<BrandColors>): BrandColors => ({
 });
 
 export const BRAND_THEMES: BrandTheme[] = [
-  { id: 'edx', name: 'edX Paragon', colors: B({ primary: '#00262b', primaryHover: '#00525d', secondary: '#c40026' }), gradient: 'linear-gradient(135deg, #00262b 0%, #007382 100%)', gradientDark: 'linear-gradient(135deg, #00262b 0%, #001518 100%)' },
+  { id: 'phi', name: 'Phi Core', colors: B({ primary: '#6366f1', primaryHover: '#4f46e5', secondary: '#06b6d4' }), gradient: 'linear-gradient(135deg, #6366f1 0%, #06b6d4 100%)', gradientDark: 'linear-gradient(135deg, #6366f1 0%, #164e63 100%)' },
+  { id: 'phiace', name: 'PhiAce', colors: B({ primary: '#0ea5e9', primaryHover: '#0284c7', secondary: '#6366f1' }), gradient: 'linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%)', gradientDark: 'linear-gradient(135deg, #0ea5e9 0%, #312e81 100%)' },
   { id: 'phiano', name: 'Phiano Phase', colors: B({ primary: '#8b5cf6', primaryHover: '#7c3aed', secondary: '#ec4899' }), gradient: 'linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%)', gradientDark: 'linear-gradient(135deg, #8b5cf6 0%, #4c1d95 100%)' },
+  { id: 'phidoc', name: 'PhiDoc', colors: B({ primary: '#14b8a6', primaryHover: '#0d9488', secondary: '#0f766e' }), gradient: 'linear-gradient(135deg, #14b8a6 0%, #2dd4bf 100%)', gradientDark: 'linear-gradient(135deg, #14b8a6 0%, #134e4a 100%)' },
+  { id: 'phient', name: 'Phient', colors: B({ primary: '#d946ef', primaryHover: '#c026d3', secondary: '#8b5cf6' }), gradient: 'linear-gradient(135deg, #d946ef 0%, #8b5cf6 100%)', gradientDark: 'linear-gradient(135deg, #d946ef 0%, #581c87 100%)' },
   { id: 'phixum', name: 'Phixum Options', colors: B({ primary: '#0284c7', primaryHover: '#0369a1', secondary: '#0f172a' }), gradient: 'linear-gradient(135deg, #0284c7 0%, #38bdf8 100%)', gradientDark: 'linear-gradient(135deg, #0284c7 0%, #082f49 100%)' },
+  { id: 'edx', name: 'edX Paragon', colors: B({ primary: '#00262b', primaryHover: '#00525d', secondary: '#c40026' }), gradient: 'linear-gradient(135deg, #00262b 0%, #007382 100%)', gradientDark: 'linear-gradient(135deg, #00262b 0%, #001518 100%)' },
   { id: 'foundry', name: 'Palantir Foundry', colors: B({ primary: '#3b82f6', primaryHover: '#2563eb' }), gradient: 'linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)', gradientDark: 'linear-gradient(135deg, #3b82f6 0%, #1e3a8a 100%)' },
   { id: 'blueprint', name: 'Blueprint Slate', colors: B({ primary: '#2d72d2', primaryHover: '#1f53a3', secondary: '#5c7080' }), gradient: 'linear-gradient(135deg, #2d72d2 0%, #106ba3 100%)', gradientDark: 'linear-gradient(135deg, #2d72d2 0%, #182026 100%)' },
   { id: 'emerald', name: 'Emerald Foundry', colors: B({ primary: '#10b981', primaryHover: '#059669' }), gradient: 'linear-gradient(135deg, #10b981 0%, #34d399 100%)', gradientDark: 'linear-gradient(135deg, #10b981 0%, #065f46 100%)' },
@@ -30,6 +34,7 @@ export const BRAND_THEMES: BrandTheme[] = [
 ];
 
 export const THEME_STYLES = [
+  { id: 'apple', name: 'Apple' },
   { id: 'flat', name: 'Flat' },
   { id: 'gradient', name: 'Gradient' },
   { id: 'elevated', name: 'Elevated' },

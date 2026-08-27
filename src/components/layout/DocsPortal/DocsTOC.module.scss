@@ -1,0 +1,27 @@
+.toc {
+  height: calc(100vh - 65px);
+  overflow-y: auto;
+  padding: 1.75rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-left: 1px solid var(--phi-color-border-subtle);
+  background: var(--phi-gradient-sidebar, var(--phi-color-background-secondary));
+}
+
+@media (max-width: 1199px) {
+  .toc {
+    display: none;
+  }
+}
+
+.title {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}

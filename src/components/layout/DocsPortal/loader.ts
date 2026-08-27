@@ -94,6 +94,7 @@ export function parseMarkdownDoc(rawMarkdown: string, filePathOrId: string): Doc
 
   return {
     id,
+    slug: `/${id}`,
     category,
     title,
     badge,

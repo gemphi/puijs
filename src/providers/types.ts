@@ -1,7 +1,5 @@
-import React from 'react';
-
 export type Theme = 'light' | 'dark' | 'system';
-export type ThemeStyle = 'flat' | 'gradient' | 'elevated' | 'glass';
+export type ThemeStyle = 'apple' | 'flat' | 'gradient' | 'elevated' | 'glass';
 
 export interface BrandColors {
   primary: string;
@@ -34,6 +32,12 @@ export interface BrandTheme {
   gradientDark: string;
 }
 
+export interface ThemePreferences {
+  theme: Theme;
+  themeStyle: ThemeStyle;
+  brandId: string;
+}
+
 export interface PuiContextValue {
   theme: Theme;
   setTheme: (theme: Theme) => void;
@@ -41,6 +45,8 @@ export interface PuiContextValue {
   setThemeStyle: (style: ThemeStyle) => void;
   brandId: string;
   setBrandId: (id: string) => void;
+  preferences: ThemePreferences;
+  setPreferences: (preferences: Partial<ThemePreferences>) => void;
   brands: BrandTheme[];
   isDark: boolean;
 }
