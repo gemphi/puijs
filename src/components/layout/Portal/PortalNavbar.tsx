@@ -62,9 +62,13 @@ export const PortalNavbar: React.FC<PortalNavbarProps> = ({
           </Button>
         )}
         {onToggleDark && (
-          <Button variant="icon" size="sm" onClick={onToggleDark} aria-label="Toggle theme mode">
-            {dark ? <Sun size={17} /> : <Moon size={17} />}
-          </Button>
+          <Button
+            variant="icon"
+            size="sm"
+            onClick={onToggleDark}
+            aria-label="Toggle theme mode"
+            iconLeft={dark ? Sun : Moon}
+          />
         )}
       </NavbarSection>
     </Navbar>

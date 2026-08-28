@@ -25,14 +25,17 @@ export type SidebarProps = {
   children: ReactNode;
   defaultCollapsed?: boolean;
   className?: string;
+  disableSpacer?: boolean;
 };
 
-export const Sidebar = ({ children, defaultCollapsed = false, className }: SidebarProps) => {
+export const Sidebar = ({ children, defaultCollapsed = false, className, disableSpacer = false }: SidebarProps) => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(defaultCollapsed);
 
   return (
     <SidebarContext.Provider value={{ sidebarCollapsed, setSidebarCollapsed, sidebarHovered: false, setSidebarHovered: () => {} }}>
-      <Stack className={sidebarCollapsed ? styles.sidebarSpacerCollapsed : styles.sidebarSpacerExpanded} />
+      {!disableSpacer && (
+        <Stack className={sidebarCollapsed ? styles.sidebarSpacerCollapsed : styles.sidebarSpacerExpanded} />
+      )}
       <Card
         hoverable={false}
         variant="flat"
@@ -40,6 +43,7 @@ export const Sidebar = ({ children, defaultCollapsed = false, className }: Sideb
           'pui-sidebar',
           styles.sidebar,
           sidebarCollapsed ? styles.sidebarCollapsed : styles.sidebarExpanded,
+          disableSpacer && styles.sidebarInline,
           className
         )}
       >
@@ -72,3 +76,5 @@ export const SidebarFooter = ({ children, className }: { children: ReactNode; cl
     </CardFooter>
   );
 };
+
+export default Sidebar;

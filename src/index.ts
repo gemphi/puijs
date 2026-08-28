@@ -3,6 +3,9 @@
 // Modeled after Palantir Blueprint (@blueprintjs/core, @blueprintjs/table)
 // ============================================================================
 
+// Global design tokens, theme variables (light/dark), and core resets.
+import './styles/core.scss';
+
 // UI Presentation Primitives & Layouts
 export * from './components/primitives';
 export * from './components/layout';

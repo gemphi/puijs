@@ -16,7 +16,7 @@ async function copyScssFiles(from, to) {
       continue;
     }
 
-    if (entry.isFile() && entry.name.endsWith('.scss')) {
+    if (entry.isFile() && (entry.name.endsWith('.scss') || entry.name.endsWith('.scss.d.ts'))) {
       await mkdir(path.dirname(outputPath), { recursive: true });
       await copyFile(sourcePath, outputPath);
     }

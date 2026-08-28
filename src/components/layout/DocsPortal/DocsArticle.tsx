@@ -45,8 +45,12 @@ export const DocsArticle: React.FC<DocsArticleProps> = ({
           <Text as="span" size="xs" variant="primary" weight="bold" textTransform="uppercase" letterSpacing="0.05em">
             {guide.category}
           </Text>
-          <Text as="span" size="xs" variant="secondary">/</Text>
-          <Text as="span" size="xs" variant="secondary" weight="semibold">{guide.badge}</Text>
+          {guide.badge && guide.badge !== guide.category && (
+            <>
+              <Text as="span" size="xs" variant="secondary">/</Text>
+              <Text as="span" size="xs" variant="secondary" weight="semibold">{guide.badge}</Text>
+            </>
+          )}
         </Stack>
 
         {/* Article Title & Summary */}
@@ -73,7 +77,7 @@ export const DocsArticle: React.FC<DocsArticleProps> = ({
 
         {/* Rendered Guide Body */}
         <Section as="article" className={styles.body}>
-          <RichMarkdownContent content={guide.content} />
+          <RichMarkdownContent content={stripDuplicateH1(guide.content, guide.title)} />
         </Section>
 
         {/* Bottom Guide Pagination */}
@@ -246,6 +250,14 @@ function InlineFormattedText({ text }: { text: string }) {
   );
 }
 
+function stripDuplicateH1(content: string, title: string): string {
+  const match = content.match(/^\s*#\s+(.+?)\s*(?:\r?\n|$)/);
+  if (match && match[1].trim().toLowerCase() === title.trim().toLowerCase()) {
+    return content.slice(match[0].length);
+  }
+  return content;
+}
+
 type MarkdownBlock =
   | { type: 'code'; lang: string; content: string }
   | { type: 'table'; headers: string[]; rows: string[][] }
@@ -344,6 +356,8 @@ function parseMarkdownBlocks(markdown: string): MarkdownBlock[] {
         });
         continue;
       }
+      blocks.push({ type: 'paragraph', content: tableLines.join(' ') });
+      continue;
     }
 
     // 6. Lists
@@ -372,6 +386,12 @@ function parseMarkdownBlocks(markdown: string): MarkdownBlock[] {
     ) {
       paraLines.push(lines[i].trim());
       i++;
+    }
+    if (!paraLines.length) {
+      // Unrecognized line type (e.g. `# ` h1 headings) — never stall the parser.
+      blocks.push({ type: 'h2', content: trimmed.replace(/^#+\s*/, '') });
+      i++;
+      continue;
     }
     blocks.push({ type: 'paragraph', content: paraLines.join(' ') });
   }

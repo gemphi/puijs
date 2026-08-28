@@ -1,40 +1,93 @@
 .portal {
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .header,
 .footer {
   min-width: 0;
+  flex-shrink: 0;
 }
 
 .main {
+  flex: 1;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .contentGrid {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr) auto;
+  flex: 1;
   width: 100%;
-  min-height: calc(100vh - 65px);
+  min-height: 0;
 }
 
-.sidebar,
-.content,
+.sidebar {
+  min-width: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.content {
+  min-width: 0;
+  overflow-x: hidden;
+}
+
 .aside {
   min-width: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
 }
 
+/* ----- Docs variant: sidebar + content + aside in a 3-col grid ---- */
+.portal[data-portal-variant='docs'] .contentGrid {
+  grid-template-columns: 280px minmax(0, 1fr) 240px;
+}
+
+.portal[data-portal-variant='docs'] .sidebar {
+  width: 280px;
+  min-width: 280px;
+  border-right: 1px solid var(--phi-color-border-subtle);
+  background: var(--phi-gradient-sidebar, var(--phi-color-background-secondary));
+}
+
+.portal[data-portal-variant='docs'] .aside {
+  width: 240px;
+  min-width: 240px;
+  border-left: 1px solid var(--phi-color-border-subtle);
+  background: var(--phi-gradient-sidebar, var(--phi-color-background-secondary));
+}
+
+/* ----- Landing / App: single column ---- */
 .portal[data-portal-variant='landing'] .contentGrid,
 .portal[data-portal-variant='app'] .contentGrid {
   display: block;
 }
 
+/* ----- Blog variant: sidebar + content ---- */
 .portal[data-portal-variant='blog'] .contentGrid {
-  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  grid-template-columns: 280px minmax(0, 1fr);
 }
 
-@media (max-width: 1024px) {
-  .contentGrid,
+/* ----- Responsive breakpoints ---- */
+@media (max-width: 1199px) {
+  .portal[data-portal-variant='docs'] .contentGrid {
+    grid-template-columns: 260px minmax(0, 1fr);
+  }
+  .aside {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .portal[data-portal-variant='docs'] .contentGrid,
   .portal[data-portal-variant='blog'] .contentGrid {
     display: flex;
     flex-direction: column;
@@ -42,6 +95,9 @@
 
   .sidebar,
   .aside {
-    width: 100%;
+    width: 100% !important;
+    min-width: 0 !important;
+    position: relative;
+    height: auto;
   }
 }

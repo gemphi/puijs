@@ -22,7 +22,7 @@ export const PortalSidebar: React.FC<PortalSidebarProps> = ({
   className = '',
 }) => {
   return (
-    <Sidebar defaultCollapsed={false} className={className}>
+    <Sidebar defaultCollapsed={false} disableSpacer={true} className={className}>
       <SidebarHeader>
         <Text size="sm" weight="semibold">{title}</Text>
       </SidebarHeader>

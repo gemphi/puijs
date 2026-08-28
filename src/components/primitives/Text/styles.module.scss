@@ -7,13 +7,13 @@
 }
 
 /* Semantic Intent Colors */
-.intent-default { color: var(--phi-color-text-primary, #f8fafc); }
-.intent-muted { color: var(--phi-color-text-muted, #94a3b8); }
-.intent-secondary { color: var(--phi-color-text-secondary, #cbd5e1); }
-.intent-primary { color: var(--phi-color-primary, #60a5fa); }
-.intent-success { color: var(--phi-color-success, #34d399); }
-.intent-warning { color: var(--phi-color-warning, #fbbf24); }
-.intent-danger { color: var(--phi-color-error, #f87171); }
+.intent-default { color: var(--phi-color-text-primary); }
+.intent-muted { color: var(--phi-color-text-muted); }
+.intent-secondary { color: var(--phi-color-text-secondary); }
+.intent-primary { color: var(--phi-color-primary); }
+.intent-success { color: var(--phi-color-success); }
+.intent-warning { color: var(--phi-color-warning); }
+.intent-danger { color: var(--phi-color-error); }
 
 /* Typography Scale */
 .size-xs { font-size: 0.75rem !important; line-height: 1.4 !important; }

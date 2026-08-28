@@ -1,6 +1,6 @@
 {
   "name": "@phiace/puijs",
-  "version": "0.3.6",
+  "version": "0.3.12",
   "type": "module",
   "description": "Industrial React component library and enterprise design system modeled after Palantir Blueprint",
   "author": "bdizha <bdizha@gmail.com>",
@@ -91,8 +91,13 @@
       "types": "./dist/providers/index.d.ts",
       "import": "./dist/providers/index.js"
     },
-    "./styles": "./dist/styles/core.scss",
-    "./tokens": "./dist/tokens/tokens.scss",
+    "./styles": {
+      "types": "./dist/styles/core.scss.d.ts",
+      "default": "./dist/styles/core.scss"
+    },
+    "./tokens": {
+      "default": "./dist/tokens/tokens.scss"
+    },
     "./utils": {
       "types": "./dist/utils/cn.d.ts",
       "import": "./dist/utils/cn.js"

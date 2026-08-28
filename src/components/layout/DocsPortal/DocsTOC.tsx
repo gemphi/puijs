@@ -4,7 +4,15 @@ import { Section } from '../Section';
 import { Text } from '../../primitives/Text';
 import styles from './DocsTOC.module.scss';
 
-export const DocsTOC: React.FC = () => {
+export interface DocsTOCProps {
+  items?: string[];
+  activeItem?: string;
+  onSelectItem?: (item: string) => void;
+}
+
+export const DocsTOC: React.FC<DocsTOCProps> = ({ items = [], activeItem, onSelectItem }) => {
+  if (!items.length) return null;
+  const active = activeItem ?? items[0];
   return (
     <Sticky top={65}>
       <Section as="aside" className={styles.toc}>
@@ -12,10 +20,18 @@ export const DocsTOC: React.FC = () => {
           On This Page
         </Text>
         <Section as="nav" className={styles.list}>
-          <Text as="span" size="sm" variant="primary" weight="semibold">Overview & Setup</Text>
-          <Text as="span" size="sm" variant="secondary">Mathematical Equations</Text>
-          <Text as="span" size="sm" variant="secondary">Production Examples</Text>
-          <Text as="span" size="sm" variant="secondary">API Specifications</Text>
+          {items.map((item) => (
+            <Text
+              key={item}
+              as="span"
+              size="sm"
+              variant={item === active ? 'primary' : 'secondary'}
+              weight={item === active ? 'semibold' : 'normal'}
+              onClick={onSelectItem ? () => onSelectItem(item) : undefined}
+            >
+              {item}
+            </Text>
+          ))}
         </Section>
       </Section>
     </Sticky>

@@ -58,6 +58,8 @@ export const DocsPortal: React.FC<DocsPortalProps> = ({
     return visibleGuides.find((guide) => guide.id === activeGuideId) || visibleGuides[0];
   }, [visibleGuides, activeGuideId]);
 
+  const tocItems = useMemo(() => extractTocHeadings(activeGuide?.content || ''), [activeGuide?.content]);
+
   const currentIndex = visibleGuides.findIndex((guide) => guide.id === activeGuide?.id);
   const prevGuide = currentIndex > 0 ? visibleGuides[currentIndex - 1] : undefined;
   const nextGuide = currentIndex >= 0 && currentIndex < visibleGuides.length - 1 ? visibleGuides[currentIndex + 1] : undefined;
@@ -68,7 +70,6 @@ export const DocsPortal: React.FC<DocsPortalProps> = ({
     <Portal
       variant="docs"
       className={cn(styles.portal, className)}
-      contentClassName={styles.contentGrid}
       header={(
         <DocsNavbar
           brandTitle={brandTitle}
@@ -83,7 +84,7 @@ export const DocsPortal: React.FC<DocsPortalProps> = ({
         />
       )}
       sidebar={<DocsSidebar categories={categories} activeGuideId={activeGuide.id} onSelectGuide={selectGuide} />}
-      aside={<DocsTOC />}
+      aside={<DocsTOC items={tocItems} onSelectItem={scrollToHeading} />}
     >
       <DocsArticle
         guide={activeGuide}
@@ -94,6 +95,28 @@ export const DocsPortal: React.FC<DocsPortalProps> = ({
     </Portal>
   );
 };
+
+function scrollToHeading(item: string): void {
+  const headings = Array.from(document.querySelectorAll('h2, h3'));
+  const target = headings.find((h) => h.textContent?.trim() === item);
+  target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function extractTocHeadings(markdown: string): string[] {
+  const headings: string[] = [];
+  let inCode = false;
+  markdown.split('\n').forEach((line) => {
+    const trimmed = line.trim();
+    if (trimmed.startsWith('```')) {
+      inCode = !inCode;
+      return;
+    }
+    if (inCode) return;
+    const match = trimmed.match(/^#{2,3}\s+(.+)$/);
+    if (match) headings.push(match[1].replace(/\*\*/g, '').trim());
+  });
+  return [...new Set(headings)];
+}
 
 export const Docs = DocsPortal;
 export const DocsPage = DocsPortal;

@@ -4,7 +4,6 @@ import { Footer } from '../Footer';
 import { Header } from '../Header';
 import { Main } from '../Main';
 import { Section } from '../Section';
-import { Stack } from '../Stack';
 import type { PortalProps } from './types';
 import styles from './Portal.module.scss';
 
@@ -21,16 +20,16 @@ export const Portal: React.FC<PortalProps> = ({
   asideClassName = '',
 }) => {
   return (
-    <Stack direction="column" gap={0} className={cn(styles.portal, className)} data-portal-variant={variant}>
+    <Section as="section" className={cn(styles.portal, className)} padding={0} data-portal-variant={variant}>
       {header && <Header className={styles.header}>{header}</Header>}
-      <Main background="gradient-main" minHeight="100vh" className={styles.main}>
-        <Section as="section" className={styles.contentGrid} padding={0}>
+      <Main className={styles.main}>
+        <Section as="section" className={cn(styles.contentGrid, contentClassName)} padding={0}>
           {sidebar && (
             <Section as="aside" className={cn(styles.sidebar, sidebarClassName)} padding={0}>
               {sidebar}
             </Section>
           )}
-          <Section as="section" className={cn(styles.content, contentClassName)} padding={0}>
+          <Section as="section" className={styles.content} padding={0}>
             {children}
           </Section>
           {aside && (
@@ -41,7 +40,7 @@ export const Portal: React.FC<PortalProps> = ({
         </Section>
       </Main>
       {footer && <Footer className={styles.footer}>{footer}</Footer>}
-    </Stack>
+    </Section>
   );
 };
 

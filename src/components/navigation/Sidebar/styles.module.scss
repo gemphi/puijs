@@ -1,3 +1,8 @@
+/* ============================
+   Sidebar — App Shell (default)
+   Uses absolute positioning + spacer pattern
+   ============================ */
+
 .sidebarSpacerCollapsed {
   width: var(--phi-sidebar-collapsed-spacer, 88px);
   flex-shrink: 0;
@@ -23,7 +28,8 @@
   left: var(--phi-layout-sidebar-margin, 12px);
   bottom: var(--phi-layout-sidebar-margin, 12px);
   z-index: 100;
-  transition: width var(--phi-animation-speed, 0.3s) cubic-bezier(0.4, 0, 0.2, 1), min-width var(--phi-animation-speed, 0.3s) cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width var(--phi-animation-speed, 0.3s) cubic-bezier(0.4, 0, 0.2, 1),
+              min-width var(--phi-animation-speed, 0.3s) cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: var(--phi-radius-lg, 16px);
   box-shadow: var(--phi-elevation-shadow, var(--phi-shadow-sm));
 }
@@ -59,6 +65,87 @@
   display: none;
 }
 
+/* ============================
+   Inline mode (for Portals & embedded layouts)
+   ============================ */
+
+.sidebarInline {
+  position: static;
+  width: 100%;
+  min-width: 0;
+  top: auto;
+  left: auto;
+  bottom: auto;
+  border-radius: 0;
+  border: none;
+  border-right: 1px solid var(--phi-color-border-subtle);
+  box-shadow: none;
+  background: var(--phi-gradient-sidebar, var(--phi-color-background-secondary));
+  overflow-y: auto;
+  height: calc(100vh - 65px);
+  z-index: auto;
+}
+
+/* ============================
+   Docs Portal Override
+   ============================ */
+
+:global([data-portal-variant='docs']) .sidebarSpacerCollapsed,
+:global([data-portal-variant='docs']) .sidebarSpacerExpanded {
+  display: none;
+}
+
+:global([data-portal-variant='docs']) .sidebar,
+:global([data-portal-variant='docs']) .sidebarExpanded,
+:global([data-portal-variant='docs']) .sidebarCollapsed {
+  position: static;
+  width: 100%;
+  min-width: 0;
+  top: auto;
+  left: auto;
+  bottom: auto;
+  border-radius: 0;
+  border: none;
+  border-right: 1px solid var(--phi-color-border-subtle);
+  box-shadow: none;
+  background: var(--phi-gradient-sidebar, var(--phi-color-background-secondary));
+  overflow-y: auto;
+  height: calc(100vh - 65px);
+  z-index: auto;
+}
+
+/* ============================
+   Blog Portal Override
+   ============================ */
+
+:global([data-portal-variant='blog']) .sidebarSpacerCollapsed,
+:global([data-portal-variant='blog']) .sidebarSpacerExpanded {
+  display: none;
+}
+
+:global([data-portal-variant='blog']) .sidebar,
+:global([data-portal-variant='blog']) .sidebarExpanded,
+:global([data-portal-variant='blog']) .sidebarCollapsed {
+  position: static;
+  width: 100%;
+  min-width: 0;
+  top: auto;
+  left: auto;
+  bottom: auto;
+  border-radius: 0;
+  border: none;
+  border-right: 1px solid var(--phi-color-border-subtle);
+  box-shadow: none;
+  background: var(--phi-gradient-sidebar, var(--phi-color-background-secondary));
+  overflow-y: auto;
+  height: calc(100vh - 65px);
+  z-index: auto;
+}
+
+/* ============================
+   Mobile: all variants collapse
+   ============================ */
+
 @media (max-width: 768px) {
   .sidebar {
     transform: translateX(-100%);
@@ -78,6 +165,13 @@
     z-index: 90;
     backdrop-filter: blur(2px);
     animation: fadeIn 0.3s ease;
+  }
+
+  :global([data-portal-variant='docs']) .sidebar,
+  :global([data-portal-variant='blog']) .sidebar,
+  .sidebarInline {
+    height: auto;
+    max-height: 50vh;
   }
 }
 
